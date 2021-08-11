@@ -14,9 +14,18 @@
     <input type="text" name="text" id="text" oninput="onType(this.value)" placeholder="type in a text">
     <div class="change-selected-line-idx" onclick="onChangeLineIdx()">change line</div>
     <div class="add-text" onclick="onAddText()">+</div>
+    <div class="add-text" onclick="onDeleteText()">Delete</div>
     <div class="bigger-text" onclick="onPlusFont(5)">A+</div>
     <div class="bigger-text" onclick="onPlusFont(-5)">A-</div>
-
+    <select onchange="onChangeFont(this.value)" name="fonts" id="fonts">
+        <option value="Impact">Impact</option>
+        <option value="Ariel">Ariel</option>
+    </select>
+    <div class="align-left" onclick="onTextAlign('left')">Align Left</div>
+    <div class="align-left" onclick="onTextAlign('center')">Align Center</div>
+    <div class="align-left" onclick="onTextAlign('right')">Align Right</div>
+    <input value="#ffffff" onchange="onChangeColor()" type="color" name="text-outline-color" id="">
+    <input value="#000" onchange="onChangeColor()" type="color" name="text-fill-color" id="">
     <div class="canvas-container">
         <canvas id="canvas" height="650" width="650"></canvas>
     </div>
