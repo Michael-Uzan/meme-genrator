@@ -12,15 +12,17 @@
 <body onload="onInit()">
     <label for="text">Type in something</label>
     <input type="text" name="text" id="text" oninput="onType(this.value, 0)" placeholder="type in a text">
+    <div class="bigger-text" onclick="onPlusFont(5)">A+</div>
+    <div class="bigger-text" onclick="onPlusFont(-5)">A-</div>
 
     <div class="canvas-container">
         <canvas id="canvas" height="650" width="650"></canvas>
     </div>
 
     <div class="photos-container">
-        <img onclick="onSelectImage(0)" src="img/1.jpg" alt="">
-        <img onclick="onSelectImage(1)" src="img/2.jpg" alt="">
-        <img onclick="onSelectImage(2)" src="img/3.jpg" alt="">
+        <img onclick="onSelectImage(1)" src="img/1.jpg" alt="">
+        <img onclick="onSelectImage(2)" src="img/2.jpg" alt="">
+        <img onclick="onSelectImage(3)" src="img/3.jpg" alt="">
     </div>
 
     <script src="js/service/memeService.js"></script>
