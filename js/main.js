@@ -5,6 +5,7 @@ var gCanvas;
 var gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
+
 function onInit() {
     gCanvas = document.getElementById('canvas');
     gCtx = gCanvas.getContext('2d');
@@ -203,4 +204,17 @@ function RenderSelectedLine() {
 function cleanTxtLine() {
     document.querySelector('[name=text]').value = '';
     document.querySelector('[name=text]').focus();
+}
+
+////////////////////////////////////////////////////////////////////////
+// SAVED MEME //
+
+function onSaveMeme() {
+    if (!isCanvas()) return
+    saveMeme(gMeme)
+}
+
+function onLoadMeme() {
+    gMeme = loadMeme()
+    renderCanvas()
 }

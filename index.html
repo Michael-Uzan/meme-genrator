@@ -10,6 +10,8 @@
 </head>
 
 <body onload="onInit()">
+    <div class="save-meme" onclick="onSaveMeme()">Save Meme</div>
+    <div class="save-meme" onclick="onLoadMeme()">Load Meme</div>
     <label for="text">Type in something</label>
     <input type="text" name="text" id="text" oninput="onType(this.value)" placeholder="type in a text">
     <div class="change-selected-line-idx" onclick="onChangeLineIdx()">change line</div>
@@ -36,8 +38,11 @@
         <img onclick="onSelectImage(3)" src="img/3.jpg" alt="">
     </div>
 
+    <script src="js/service/storageService.js"></script>
+    <script src="js/service/userMemesService.js"></script>
     <script src="js/service/memeService.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/userMemesController.js"></script>
 </body>
 
 </html>
