@@ -27,9 +27,10 @@ function onDown(ev) {
     const clickedPos = getEvPos(ev)
     console.log('pos', clickedPos)
     if (!isLineClicked(clickedPos)) return
+    // line is clicked:
+    RenderSelectedLine()
     gStartPos = clickedPos
     document.body.style.cursor = 'grabbing'
-    // document.querySelector('body').style.cursor = 'grab'
 }
 
 function onMove(ev) {
@@ -81,6 +82,7 @@ function drawImgFromLocal(imgUrl) {
 
 function onSelectImage(photoId) {
     resetMeme()
+    cleanTxtLine()
     setSelectedImg(photoId)
     renderCanvas()
 }
@@ -94,10 +96,10 @@ function drawText(txt, x, y, size = 100) {
     gCtx.strokeText(txt, x, y)
 }
 
-function onType(txt, lineIdx) {
+function onType(txt) {
     if (!isCanvas()) return
     console.log('rendering on Canvas: ', txt);
-    updateTxtLine(txt, lineIdx)
+    updateTxtLine(txt)
     renderCanvas()
 }
 
@@ -118,4 +120,23 @@ function onPlusFont(diff) {
     if (!isCanvas()) return
     plusFont(diff)
     renderCanvas()
+}
+
+function onAddText() {
+    addText()
+    cleanTxtLine()
+}
+
+function onChangeLineIdx() {
+    changeLineIdx()
+    RenderSelectedLine()
+}
+
+function RenderSelectedLine() {
+    var selectedLine = getSelectedLine()
+    document.querySelector('[name=text]').value = selectedLine.txt;
+}
+
+function cleanTxtLine() {
+    document.querySelector('[name=text]').value = '';
 }

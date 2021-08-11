@@ -1,5 +1,4 @@
 'use strict'
-
 var gMeme = createMeme();
 const gImgs = [
     {
@@ -22,7 +21,7 @@ const gImgs = [
 function createMeme() {
     return {
         selectedImgId: null,
-        selectedLineIdx: null,
+        selectedLineIdx: 0,
         isDrag: false,
         lines: [
             {
@@ -48,9 +47,10 @@ function setSelectedImg(photoId) {
     gMeme.selectedImgId = photoId
 }
 
-function updateTxtLine(txt, lineIdx) {
-    gMeme.selectedLineIdx = lineIdx
-    gMeme.lines[lineIdx].txt = txt;
+function updateTxtLine(txt) {
+    // if (!gMeme.selectedLineIdx) lineIdx = 0;
+    // gMeme.selectedLineIdx = lineIdx;
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
 function getMeme() {
@@ -67,7 +67,7 @@ function isCanvas() {
 
 function plusFont(diff) {
     var fontSize = gMeme.lines[gMeme.selectedLineIdx].fontSize
-    if (fontSize === 0 || fontSize === 150) return
+    if (fontSize === 25 || fontSize === 150) return
     gMeme.lines[gMeme.selectedLineIdx].fontSize += diff
 }
 
@@ -103,3 +103,27 @@ function setFlaseLineDrag() {
     gMeme.isDrag = false;
 }
 
+function addText() {
+    gMeme.lines.push(createLine())
+    gMeme.selectedLineIdx = gMeme.lines.length - 1;
+}
+
+function createLine() {
+    return {
+        txt: '',
+        fontSize: 45,
+        align: null,
+        color: null,
+        position: { x: 150, y: 150 },
+        isDrag: false
+    }
+}
+
+function changeLineIdx() {
+    if (gMeme.selectedLineIdx < gMeme.lines.length - 1) gMeme.selectedLineIdx++
+    else gMeme.selectedLineIdx = 0;
+}
+
+function getSelectedLine() {
+    return gMeme.lines[gMeme.selectedLineIdx];
+}
