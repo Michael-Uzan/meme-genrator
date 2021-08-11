@@ -8,7 +8,7 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 function onInit() {
     gCanvas = document.getElementById('canvas');
     gCtx = gCanvas.getContext('2d');
-    drawText('Choose a photo', 150, 150, 45, { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'left')
+    drawText('Choose a photo', 150, 150, 45, { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
     addListeners()
 }
 
@@ -165,7 +165,7 @@ function onChangeColor() {
 
 function onAddText() {
     if (!isCanvas()) return
-    addText(gCanvas.height)
+    addText(gCanvas.height, gCanvas.width)
     cleanTxtLine()
 }
 

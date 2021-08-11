@@ -4,17 +4,20 @@ const gImgs = [
     {
         id: 1,
         url: 'img/1.jpg',
-        keywords: []
+        keywords: [],
+        dimenntion: { type: 'square', width: 500, height: 500 }
     },
     {
         id: 2,
         url: 'img/2.jpg',
-        keywords: []
+        keywords: [],
+        dimenntion: { type: 'square', width: 500, height: 500 }
     },
     {
         id: 3,
         url: 'img/3.jpg',
-        keywords: []
+        keywords: [],
+        dimenntion: { type: 'square', width: 500, height: 500 }
     }
 ];
 
@@ -30,7 +33,6 @@ function createMeme() {
                 fontSize: 70,
                 font: 'Impact',
                 textAlign: 'left',
-                align: null,
                 color: { outLineColor: '#000000', fillColor: '#ffffff' },
                 position: { x: 100, y: 100 },
                 isDrag: false
@@ -39,21 +41,26 @@ function createMeme() {
     }
 }
 
-function _createLine(linesCount, height, align) {
+function _createLine(linesCount, height, width, align) {
     console.log(' linesCount', linesCount)
+
     if (linesCount % 2 === 0) {
-        var position = { x: 100, y: 100 + linesCount * 40 }
+        var y = 100 + linesCount * 40;
     } else {
-        var position = { x: 100, y: height - 100 - (linesCount - 1) * 40 }
+        var y = height - 100 - (linesCount - 1) * 40;
     }
+    if (align === 'left') var x = 100;
+    if (align === 'center') var x = width / 2;
+    if (align === 'right') var x = width - 100;
+
+    const position = { x: x, y: y };
     return {
         txt: '',
         fontSize: 70,
         font: 'Impact',
         textAlign: align,
-        align: null,
         color: { outLineColor: '#000000', fillColor: '#ffffff' },
-        position,
+        position: position,
         isDrag: false
     }
 }
@@ -106,10 +113,17 @@ function textAlign(align) {
 function isLineClicked(clickedPos) {
 
     var lineIdx = gMeme.lines.findIndex(function (line) {
-        console.log('fontSize', line.fontSize)
-        console.log('txt.length', line.txt.length)
-        return ((clickedPos.x > line.position.x && clickedPos.x < line.position.x + ((line.fontSize / 2) * line.txt.length)) &&
-            (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize)))
+        if (line.textAlign === 'left') {
+            return (clickedPos.x > line.position.x) && (clickedPos.x < (line.position.x + ((line.fontSize / 2) * line.txt.length))) &&
+                (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
+        } else if (line.textAlign === 'center') {
+            const helfWordPx = ((line.fontSize / 2) * line.txt.length) / 2;
+            return (clickedPos.x > (line.position.x - helfWordPx)) && (clickedPos.x < (line.position.x + helfWordPx)) &&
+                (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
+        } else {
+            return (clickedPos.x > (line.position.x - ((line.fontSize / 2) * line.txt.length))) & (clickedPos.x < line.position.x) &&
+                (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
+        }
     })
     if (lineIdx === -1) return false;
     gMeme.selectedLineIdx = lineIdx;
@@ -134,8 +148,8 @@ function setFlaseLineDrag() {
     gMeme.isDrag = false;
 }
 
-function addText(height) {
-    gMeme.lines.push(_createLine(gMeme.lines.length, height))
+function addText(height, width) {
+    gMeme.lines.push(_createLine(gMeme.lines.length, height, width, gMeme.lines[gMeme.selectedLineIdx].textAlign))
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 function deleteText() {
