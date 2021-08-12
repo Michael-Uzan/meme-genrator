@@ -1,25 +1,6 @@
 'use strict'
 var gMeme = createMeme();
-const gImgs = [
-    {
-        id: 1,
-        url: 'img/memes/1.jpg',
-        keywords: [],
-        dimenntion: { type: 'square', width: 500, height: 500 }
-    },
-    {
-        id: 2,
-        url: 'img/memes/2.jpg',
-        keywords: [],
-        dimenntion: { type: 'square', width: 500, height: 500 }
-    },
-    {
-        id: 3,
-        url: 'img/memes/3.jpg',
-        keywords: [],
-        dimenntion: { type: 'square', width: 500, height: 500 }
-    }
-];
+
 
 // CREATE MEME
 
@@ -105,14 +86,8 @@ function resetMeme() {
     gMeme = createMeme()
 }
 
-
-//  IMAGE SERVICE
-
-function getSelectedImage() {
-    var photoIdx = gImgs.findIndex(function (img) {
-        return gMeme.selectedImgId === img.id
-    })
-    return gImgs[photoIdx];
+function getMeme() {
+    return gMeme;
 }
 
 function setSelectedImg(photoId) {

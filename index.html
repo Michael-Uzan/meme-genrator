@@ -11,16 +11,16 @@
     <title>Meme Generator</title>
 </head>
 
-<body onload="onInit()">
+<body onload="onInitImgs(),onInitMeme()">
 
     <!-- HEADER -->
 
     <header class="main-header main-layout flex direction-row align-center space-between theme-color">
         <div class="logo flex  align-center"><img src="img/icons/LOGO.png" alt=""></div>
         <ul class="main-nav clean-list flex direction-row align-center">
-            <li class="flex align-center" onclick="onChangeTab('gallery')">Gallery</li>
-            <li class="flex align-center" onclick="onChangeTab('editor')">Editor</li>
-            <li class="flex align-center" onclick="onChangeTab('saved')">Saved</li><span>|</span>
+            <li class="flex align-center active" onclick="onChangeTab('gallery'),activeNav(this)">Gallery</li>
+            <li class="flex align-center" onclick="onChangeTab('editor'),activeNav(this)">Editor</li>
+            <li class="flex align-center" onclick="onChangeTab('saved'),activeNav(this)">Saved</li><span>|</span>
             <li class="flex align-center">About</li>
         </ul>
         <!-- <button class="btn-menu-toggle" onclick="toggleMenu()">☰</button> -->
@@ -28,7 +28,7 @@
 
     <!-- HOME -->
 
-    <main class="gallery" style="display: none;">
+    <main class="gallery">
 
         <!-- <section class="serch">
         <input type="text" name="serch-input" id="serch-input" placeholder="Enter serach keyword">
@@ -41,18 +41,7 @@
     </section> -->
 
         <section class="photos-container main-layout">
-            <img onclick="onSelectImage(1)" src="img/memes/1.jpg" alt="">
-            <img onclick="onSelectImage(2)" src="img/memes/2.jpg" alt="">
-            <img onclick="onSelectImage(3)" src="img/memes/3.jpg" alt="">
-            <img onclick="onSelectImage(4)" src="img/memes/4.jpg" alt="">
-            <img onclick="onSelectImage(5)" src="img/memes/5.jpg" alt="">
-            <img onclick="onSelectImage(6)" src="img/memes/6.jpg" alt="">
-            <img onclick="onSelectImage(7)" src="img/memes/7.jpg" alt="">
-            <img onclick="onSelectImage(8)" src="img/memes/8.jpg" alt="">
-            <img onclick="onSelectImage(9)" src="img/memes/9.jpg" alt="">
-            <img onclick="onSelectImage(10)" src="img/memes/10.jpg" alt="">
-            <img onclick="onSelectImage(11)" src="img/memes/11.jpg" alt="">
-            <img onclick="onSelectImage(12)" src="img/memes/12.jpg" alt="">
+            <!-- RENDER PHOTOS -->
         </section>
 
     </main>
@@ -111,10 +100,12 @@
     </footer>
 
     <script src="js/service/storageService.js"></script>
-    <script src="js/service/userMemesService.js"></script>
+    <script src="js/service/imgService.js"></script>
     <script src="js/service/memeService.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/userMemesController.js"></script>
+    <!-- <script src="js/service/userMemesService.js"></script> -->
+    <script src="js/imgsController.js"></script>
+    <script src="js/memeController.js"></script>
+    <!-- <script src="js/userMemesController.js"></script> -->
 </body>
 
 </html>

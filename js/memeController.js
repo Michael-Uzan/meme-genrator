@@ -6,7 +6,7 @@ var gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 
-function onInit() {
+function onInitMeme() {
     gCanvas = document.getElementById('canvas');
     gCtx = gCanvas.getContext('2d');
     drawText('Choose a photo', 150, 150, 45, { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
@@ -69,13 +69,6 @@ function getEvPos(ev) {
         }
     }
     return pos
-}
-
-function onSelectImage(photoId) {
-    resetMeme()
-    cleanTxtLine()
-    setSelectedImg(photoId)
-    renderCanvas()
 }
 
 //  RENDER CANVAS
@@ -169,9 +162,9 @@ function onAddText() {
 
 function onDeleteText() {
     if (!isCanvas()) return
-    deleteText()
-    cleanTxtLine()
-    renderCanvas()
+    deleteText();
+    cleanTxtLine();
+    renderCanvas();
 }
 
 function onTextAlign(align) {
@@ -215,25 +208,3 @@ function onLoadMeme() {
     renderCanvas()
 }
 
-// CHANGED TAB //
-
-function onChangeTab(tab) {
-    var gallery = document.querySelector('body .gallery')
-    var editor = document.querySelector('body .editor')
-    var saved = document.querySelector('body .saved')
-    console.log('tab', tab)
-
-    if (tab === 'editor') {
-        saved.style.display = 'none';
-        gallery.style.display = 'none';
-        editor.style.display = 'flex';
-    } else if (tab === 'gallery') {
-        saved.style.display = 'none';
-        gallery.style.display = 'block';
-        editor.style.display = 'none';
-    } else if (tab === 'saved') {
-        saved.style.display = 'block';
-        gallery.style.display = 'none';
-        editor.style.display = 'none';
-    }
-}
