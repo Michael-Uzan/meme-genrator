@@ -9,8 +9,26 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 function onInitMeme() {
     gCanvas = document.getElementById('canvas');
     gCtx = gCanvas.getContext('2d');
-    drawText('Choose a photo', 150, 150, 45, { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
+    resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
+    window.addEventListener('resize', (ev) => {
+        console.log('ev', ev);
+        resizeCanvas()
+        // Debouncing?..
+        // drawText('Nothing like a good stretch ' + Date.now(), 0, 225)
+    })
+    drawText('Choose a photo', (gCanvas.height / 5), (gCanvas.height / 5), (gCanvas.height / 10), { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
     addListeners()
+
+}
+
+function resizeCanvas() {
+    var elContainer = document.querySelector('.canvas-container');
+    // Note: changing the canvas dimension this way clears the canvas
+    gCanvas.width = elContainer.offsetWidth
+    // gCanvas.width = elContainer.offsetWidth - 20
+    // Unless needed, better keep height fixed.
+    gCanvas.height = elContainer.offsetHeight
 }
 
 // Event listners //

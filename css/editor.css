@@ -4,46 +4,33 @@
     background-color: rgb(227, 227, 227);
     /* display: flex; */
     justify-content: center;
-    gap: 100px;
-    padding-top: 30px;
-    padding-bottom: 30px;
 }
 
 /* CANVAS */
 
-.canvas-container {
-    padding-top: 15px;
-}
-
 canvas {
     border: 2px solid black;
     background-color: white;
+    text-align: center;
 }
 
 /* BUTTOMS CANVAS */
 
 .buttoms-canvas {
-    padding-top: 15px;
-    width: 382px;
-    height: 585px;
     display: grid;
     justify-content: center;
-    grid-template-columns: 60px 60px 60px 60px 60px;
-    grid-template-rows: 60px 60px 30px 60px 60px 120px 60px;
-    grid-gap: 10px 20px;
 }
 
 .buttoms-canvas div {
     background-color: white;
-    border-radius: 15px;
+    border-radius: 1.2em;
     display: flex;
     justify-content: center;
 }
 
 .buttoms-canvas div img {
-    margin-top: 10px;
-    height: 40px;
-    width: 40px;
+    height: 66%;
+    width: 66%;
     object-fit: cover;
 }
 
@@ -51,7 +38,7 @@ canvas {
     grid-column: 1 /6;
     grid-row: 1/2;
     border: 0px solid white;
-    border-radius: 15px;
+    border-radius: .8em;
     font-family: montserrat;
     font-size: 1.4rem;
 }
@@ -102,7 +89,7 @@ canvas {
     font-family: montserrat;
     font-size: 1.4rem;
     border: 0px solid white;
-    border-radius: 15px;
+    border-radius: .8em;
 }
 
 .outline-color, .img-color-outline {
@@ -129,10 +116,10 @@ canvas {
 .buttoms-canvas .btn {
     font-family: montserrat;
     font-size: 1.4rem;
-    border-radius: 15px;
+    border-radius: 1.2em;
     color: white;
     background-color: #ff7f00;
-    padding-top: 10px;
+    /* padding-top: 5%; */
 }
 
 .btn-save {
@@ -143,4 +130,97 @@ canvas {
 .btn-share {
     grid-column: 4/6;
     grid-row: 7/8;
+}
+
+/* RESPNOSIVE */
+
+/* Mobile  */
+
+@media (max-width: 700px) {
+    .editor {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        padding-top: 10px;
+        padding-bottom: 13px;
+    }
+    .buttoms-canvas {
+        padding-top: 10px;
+        width: 283px;
+        grid-template-columns: 40px 40px 40px 40px 40px;
+        grid-template-rows: 40px 40px 2px 40px 40px 50px 40px;
+        grid-gap: 8px 25px;
+    }
+    .canvas-container {
+        width: 310px;
+        height: 310px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+/* SMALL  */
+
+@media (min-width: 700px) {
+    .editor {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+    .buttoms-canvas {
+        padding-top: 10px;
+        width: 283px;
+        /* height: 450px; */
+        grid-template-columns: 40px 40px 40px 40px 40px;
+        grid-template-rows: 40px 40px 2px 40px 40px 50px 40px;
+        grid-gap: 8px 25px;
+    }
+    .canvas-container {
+        width: 430px;
+        height: 430px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+/* large  */
+
+@media (min-width: 850px) {
+    /* CANVAS */
+    .canvas-container {
+        width: 450px;
+        height: 450px;
+    }
+}
+
+/* Desktop */
+
+@media (min-width: 1300px) {
+    .editor {
+        flex-direction: row;
+        gap: 100px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .buttoms-canvas {
+        padding-top: 15px;
+        width: 382px;
+        height: 585px;
+        grid-template-columns: 60px 60px 60px 60px 60px;
+        grid-template-rows: 60px 60px 30px 60px 60px 120px 60px;
+        grid-gap: 10px 20px;
+    }
+    /* CANVAS */
+    .canvas-container {
+        width: 550px;
+        height: 550px;
+        padding-top: 15px;
+    }
+    .buttoms-canvas .btn {
+        padding-top: 5%;
+    }
 }
