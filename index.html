@@ -13,17 +13,19 @@
 
 <body onload="onInitImgs(),onInitMeme()">
 
+    <div class="screen pointer" onclick="openRightNav()"></div>
+
     <!-- HEADER -->
 
     <header class="main-header main-layout flex direction-row align-center space-between theme-color">
         <div class="logo flex  align-center"><img src="img/icons/LOGO.png" alt=""></div>
-        <ul class="main-nav clean-list flex direction-row align-center">
-            <li class="flex align-center active" onclick="onChangeTab('gallery'),activeNav(this)">Gallery</li>
-            <li class="flex align-center" onclick="onChangeTab('editor'),activeNav(this)">Editor</li>
-            <li class="flex align-center" onclick="onChangeTab('saved'),activeNav(this)">Saved</li><span>|</span>
-            <li class="flex align-center">About</li>
+        <ul class="main-nav clean-list">
+            <li class="active" onclick="onChangeTab('gallery'),activeNav(this),openRightNav()">Gallery</li>
+            <li onclick="onChangeTab('editor'),activeNav(this),openRightNav()">Editor</li>
+            <li onclick="onChangeTab('saved'),activeNav(this),openRightNav()">Saved</li><span>|</span>
+            <li>About</li>
         </ul>
-        <!-- <button class="btn-menu-toggle" onclick="toggleMenu()">☰</button> -->
+        <button class="btn-menu-toggle theme-color" onclick="openRightNav()">☰</button>
     </header>
 
     <!-- HOME -->
@@ -96,7 +98,7 @@
 
     <footer class="main-footer main-layout flex direction-col theme-color">
         <div class="logo flex align-center"><img src="img/icons/LOGO.png" alt=""></div>
-        <p>cooffe rights</p>
+        <p> &#169; Michael Uzan</p>
     </footer>
 
     <script src="js/service/storageService.js"></script>

@@ -2,7 +2,7 @@
 
 .editor {
     background-color: rgb(227, 227, 227);
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     gap: 100px;
     padding-top: 30px;

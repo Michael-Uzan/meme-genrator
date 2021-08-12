@@ -56,3 +56,8 @@ function activeNav(navEl) {
     }
 }
 
+// RIGHT NAV//
+
+function openRightNav() {
+    document.querySelector('body').classList.toggle('menu-open');
+}

@@ -30,16 +30,6 @@ img {
     background-color: #ff7f00
 }
 
-/* h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-    margin: 0 0 .8em;
-    line-height: 1.4;
-}
-
-h2 {
-    font-size: 1.875rem;
-} */
-
 /* HELPERS */
 
 /* flex helpers */
@@ -74,11 +64,6 @@ h2 {
 
 /* LAYOUT */
 
-.main-layout {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 /* HIDDEN TAB */
 
 .editor {
@@ -95,41 +80,10 @@ h2 {
     height: 65px;
 }
 
-.main-header .logo {
-    padding-left: 50px;
-}
-
 .logo img {
     width: 138px;
     height: 25px;
     object-fit: contain;
-}
-
-.main-nav {
-    gap: 0 30px;
-    padding-right: 50px;
-    height: 100%;
-}
-
-.main-nav li {
-    height: 100%;
-    font-size: 1.187rem;
-    color: cornsilk;
-}
-
-.main-nav span {
-    font-size: 1.187rem;
-    color: cornsilk;
-}
-
-.main-nav li:hover {
-    color: rgb(0, 0, 0);
-    box-shadow: inset 0px -5px 0 rgb(0, 0, 0);
-}
-
-.main-nav .active {
-    color: rgb(0, 0, 0);
-    box-shadow: inset 0px -5px 0 rgb(0, 0, 0);
 }
 
 /* FOOTER */
@@ -146,4 +100,132 @@ footer p {
 footer .logo {
     margin-top: 75px;
     display: inline-block;
+}
+
+/* Mobile  */
+
+@media (max-width: 700px) {
+    /* MAIN LAYOUT */
+    .main-layout {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    /* MAIN VAN */
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        min-width: 240px;
+        height: 100vh;
+        background-color: rgba(41, 41, 41, 0.9);
+        box-shadow: 0px 0px 0px transparent;
+        transform: translateX(100%);
+        transition: transform .9s;
+    }
+    body.menu-open .main-nav {
+        transform: translateX(0);
+        box-shadow: -8px 0px 20px rgb(0 0 0 / 20%);
+    }
+    .main-nav span {
+        display: none;
+    }
+    .main-nav li {
+        padding: 20px 0;
+        width: 100%;
+        height: 10%;
+        text-align: center;
+        font-size: 1.187rem;
+        color: rgb(228, 219, 183);
+    }
+    .main-nav .active {
+        color: rgb(255, 255, 255);
+        box-shadow: inset 10px 0 0 rgba(255, 255, 255, 0.966)
+    }
+    /* MENU BUTTON */
+    .btn-menu-toggle {
+        border: 0px;
+        color: white;
+        font-size: 35px;
+        padding-right: 25px;
+    }
+    /* Screen */
+    .screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(0 0 0 / 50%);
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .6s;
+    }
+    body.menu-open .screen {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* SMALL  */
+
+@media (min-width: 700px) {
+    /* LAYOUT */
+    .main-layout {
+        max-width: 650px;
+        margin: 0 auto;
+    }
+    .main-header .logo {
+        padding-left: 50px;
+    }
+    /* MAIN NAV */
+    .main-nav {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 0 30px;
+        padding-right: 50px;
+        height: 100%;
+    }
+    .main-nav li {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        font-size: 1.187rem;
+        color: cornsilk;
+    }
+    .main-nav span {
+        font-size: 1.187rem;
+        color: cornsilk;
+    }
+    .main-nav li:hover {
+        color: rgb(0, 0, 0);
+        box-shadow: inset 0px -5px 0 rgb(0, 0, 0);
+    }
+    .main-nav .active {
+        color: rgb(0, 0, 0);
+        box-shadow: inset 0px -5px 0 rgb(0, 0, 0);
+    }
+    /* MENU BUTTON */
+    .btn-menu-toggle {
+        display: none;
+    }
+}
+
+/* large  */
+
+@media (min-width: 850px) {
+    .main-layout {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+/* Desktop */
+
+@media (min-width: 1300px) {
+    .main-layout {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
