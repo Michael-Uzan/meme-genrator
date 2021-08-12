@@ -3,23 +3,25 @@ var gMeme = createMeme();
 const gImgs = [
     {
         id: 1,
-        url: 'img/1.jpg',
+        url: 'img/memes/1.jpg',
         keywords: [],
         dimenntion: { type: 'square', width: 500, height: 500 }
     },
     {
         id: 2,
-        url: 'img/2.jpg',
+        url: 'img/memes/2.jpg',
         keywords: [],
         dimenntion: { type: 'square', width: 500, height: 500 }
     },
     {
         id: 3,
-        url: 'img/3.jpg',
+        url: 'img/memes/3.jpg',
         keywords: [],
         dimenntion: { type: 'square', width: 500, height: 500 }
     }
 ];
+
+// CREATE MEME
 
 function createMeme() {
     return {
@@ -65,49 +67,10 @@ function _createLine(linesCount, height, width, align) {
     }
 }
 
-function getSelectedImage() {
-    var photoIdx = gImgs.findIndex(function (img) {
-        return gMeme.selectedImgId === img.id
-    })
-    return gImgs[photoIdx];
-}
-
-function setSelectedImg(photoId) {
-    gMeme.selectedImgId = photoId;
-}
-
-function updateTxtLine(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
-}
-
-function getMeme() {
-    return gMeme;
-}
-
-function resetMeme() {
-    gMeme = createMeme()
-}
+// IS BOOLEAN?
 
 function isCanvas() {
     return gMeme.selectedImgId;
-}
-
-function plusFont(diff) {
-    var fontSize = gMeme.lines[gMeme.selectedLineIdx].fontSize
-    if (fontSize === 25 || fontSize === 150) return
-    gMeme.lines[gMeme.selectedLineIdx].fontSize += diff
-}
-
-function changeColor(color) {  //{ outLineColor: outLineColor, fillColor: fillColor }
-    gMeme.lines[gMeme.selectedLineIdx].color = color
-}
-
-function ChangeFont(font) {
-    gMeme.lines[gMeme.selectedLineIdx].font = font
-}
-
-function textAlign(align) {
-    gMeme.lines[gMeme.selectedLineIdx].textAlign = align
 }
 
 function isLineClicked(clickedPos) {
@@ -130,6 +93,54 @@ function isLineClicked(clickedPos) {
     gMeme.lines[lineIdx].isDrag = true;
     gMeme.isDrag = true;
     return true
+}
+
+// MEME SERVICE
+
+function getMeme() {
+    return gMeme;
+}
+
+function resetMeme() {
+    gMeme = createMeme()
+}
+
+
+//  IMAGE SERVICE
+
+function getSelectedImage() {
+    var photoIdx = gImgs.findIndex(function (img) {
+        return gMeme.selectedImgId === img.id
+    })
+    return gImgs[photoIdx];
+}
+
+function setSelectedImg(photoId) {
+    gMeme.selectedImgId = photoId;
+}
+
+// TEXT SERVICE
+
+function updateTxtLine(txt) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+}
+
+function plusFont(diff) {
+    var fontSize = gMeme.lines[gMeme.selectedLineIdx].fontSize
+    if (fontSize === 25 || fontSize === 150) return
+    gMeme.lines[gMeme.selectedLineIdx].fontSize += diff
+}
+
+function changeColor(color) {  //{ outLineColor: outLineColor, fillColor: fillColor }
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function ChangeFont(font) {
+    gMeme.lines[gMeme.selectedLineIdx].font = font
+}
+
+function textAlign(align) {
+    gMeme.lines[gMeme.selectedLineIdx].textAlign = align
 }
 
 function getDragLine() {
@@ -157,7 +168,6 @@ function deleteText() {
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
-
 
 function changeLineIdx() {
     if (gMeme.selectedLineIdx < gMeme.lines.length - 1) gMeme.selectedLineIdx++

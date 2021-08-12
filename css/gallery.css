@@ -1,0 +1,17 @@
+/* GALLARY */
+
+.photos-container {
+    background-color: rgba(229, 226, 226, 0.89);
+    display: grid;
+    grid-template-columns: 350px 350px 350px;
+    grid-template-rows: 275px 275px 275px;
+    grid-gap: 20px;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.photos-container img {
+    object-fit: cover;
+    height: 100%;
+}

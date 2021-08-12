@@ -6,37 +6,109 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/editor.css">
     <title>Meme Generator</title>
 </head>
 
 <body onload="onInit()">
-    <div class="save-meme" onclick="onSaveMeme()">Save Meme</div>
-    <div class="save-meme" onclick="onLoadMeme()">Load Meme</div>
-    <label for="text">Type in something</label>
-    <input type="text" name="text" id="text" oninput="onType(this.value)" placeholder="type in a text">
-    <div class="change-selected-line-idx" onclick="onChangeLineIdx()">change line</div>
-    <div class="add-text" onclick="onAddText()">+</div>
-    <div class="add-text" onclick="onDeleteText()">Delete</div>
-    <div class="bigger-text" onclick="onPlusFont(5)">A+</div>
-    <div class="bigger-text" onclick="onPlusFont(-5)">A-</div>
-    <select onchange="onChangeFont(this.value)" name="fonts" id="fonts">
-        <option value="Impact">Impact</option>
-        <option value="Ariel">Ariel</option>
-    </select>
-    <div class="align-left" onclick="onTextAlign('left')">Align Left</div>
-    <div class="align-left" onclick="onTextAlign('center')">Align Center</div>
-    <div class="align-left" onclick="onTextAlign('right')">Align Right</div>
-    <input value="#ffffff" onchange="onChangeColor()" type="color" name="text-outline-color" id="">
-    <input value="#000" onchange="onChangeColor()" type="color" name="text-fill-color" id="">
-    <div class="canvas-container">
-        <canvas id="canvas" height="650" width="650"></canvas>
-    </div>
 
-    <div class="photos-container">
-        <img onclick="onSelectImage(1)" src="img/1.jpg" alt="">
-        <img onclick="onSelectImage(2)" src="img/2.jpg" alt="">
-        <img onclick="onSelectImage(3)" src="img/3.jpg" alt="">
-    </div>
+    <!-- HEADER -->
+
+    <header class="main-header main-layout flex direction-row align-center space-between theme-color">
+        <div class="logo flex  align-center"><img src="img/icons/LOGO.png" alt=""></div>
+        <ul class="main-nav clean-list flex direction-row align-center">
+            <li class="flex align-center" onclick="onChangeTab('gallery')">Gallery</li>
+            <li class="flex align-center" onclick="onChangeTab('editor')">Editor</li>
+            <li class="flex align-center" onclick="onChangeTab('saved')">Saved</li><span>|</span>
+            <li class="flex align-center">About</li>
+        </ul>
+        <!-- <button class="btn-menu-toggle" onclick="toggleMenu()">☰</button> -->
+    </header>
+
+    <!-- HOME -->
+
+    <main class="gallery" style="display: none;">
+
+        <!-- <section class="serch">
+        <input type="text" name="serch-input" id="serch-input" placeholder="Enter serach keyword">
+        <ul class="common-serach clean-list">
+            <li>funny</li>
+            <li>Comics</li>
+            <li>digs</li>
+            <li>drinks</li>
+        </ul>
+    </section> -->
+
+        <section class="photos-container main-layout">
+            <img onclick="onSelectImage(1)" src="img/memes/1.jpg" alt="">
+            <img onclick="onSelectImage(2)" src="img/memes/2.jpg" alt="">
+            <img onclick="onSelectImage(3)" src="img/memes/3.jpg" alt="">
+            <img onclick="onSelectImage(4)" src="img/memes/4.jpg" alt="">
+            <img onclick="onSelectImage(5)" src="img/memes/5.jpg" alt="">
+            <img onclick="onSelectImage(6)" src="img/memes/6.jpg" alt="">
+            <img onclick="onSelectImage(7)" src="img/memes/7.jpg" alt="">
+            <img onclick="onSelectImage(8)" src="img/memes/8.jpg" alt="">
+            <img onclick="onSelectImage(9)" src="img/memes/9.jpg" alt="">
+            <img onclick="onSelectImage(10)" src="img/memes/10.jpg" alt="">
+            <img onclick="onSelectImage(11)" src="img/memes/11.jpg" alt="">
+            <img onclick="onSelectImage(12)" src="img/memes/12.jpg" alt="">
+        </section>
+
+    </main>
+
+    <!-- EDITOR -->
+
+    <main class="editor main-layout">
+        <div class="canvas-container">
+            <canvas id="canvas" height="550" width="550"></canvas>
+        </div>
+        <div class="buttoms-canvas">
+            <input type="text" name="text" id="text" oninput="onType(this.value)" placeholder="type in a text">
+            <div class="change-selected-line-idx" onclick="onChangeLineIdx()"><img
+                    src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png"></div>
+            <div class="add-text" onclick="onAddText()"><img src="img/icons/add.png"></div>
+            <div class="delete-text" onclick="onDeleteText()"><img src="img/icons/trash.png"></div>
+            <div class="bigger-text" onclick="onPlusFont(5)"><img src="img/icons/increase font - icon.png"></div>
+            <div class="smaller-text" onclick="onPlusFont(-5)"><img src="img/icons/decrease font - icon.png">
+            </div>
+            <div class="align-left" onclick="onTextAlign('left')"><img src="img/icons/align-to-left.png"></div>
+            <div class="align-center" onclick="onTextAlign('center')"><img src="img/icons/center-text-alignment.png">
+            </div>
+            <div class="align-right" onclick="onTextAlign('right')"><img src="img/icons/align-to-right.png">
+            </div>
+            <select onchange="onChangeFont(this.value)" name="fonts" id="fonts">
+                <option value="Impact">Impact</option>
+                <option value="Ariel">Ariel</option>
+            </select>
+
+            <div class="outline-color">
+                <input value="#ffffff" onchange="onChangeColor()" type="color" name="text-outline-color">
+            </div>
+            <div class="img-color-outline"><img src="img/icons/paint-board-and-brush-outline.png"></div>
+
+            <div class="fill-color">
+                <input value="#000" onchange="onChangeColor()" type="color" name="text-fill-color">
+            </div>
+            <div class="img-color-fill"><img src="img/icons/paint-board-and-brush.png"></div>
+
+            <div class="btn btn-save theme-color">Save</div>
+            <div class="btn btn-share theme-color">Share</div>
+            <div class="donload"><img src="img/icons/download.png"></div>
+        </div>
+    </main>
+
+    <!-- SAVED -->
+    <main class="saved">Saved
+        <div class="save-meme" onclick="onSaveMeme()">Save Meme</div>
+        <div class="save-meme" onclick="onLoadMeme()">Load Meme</div>
+    </main>
+    <!-- FOOTER -->
+
+    <footer class="main-footer main-layout flex direction-col theme-color">
+        <div class="logo flex align-center"><img src="img/icons/LOGO.png" alt=""></div>
+        <p>cooffe rights</p>
+    </footer>
 
     <script src="js/service/storageService.js"></script>
     <script src="js/service/userMemesService.js"></script>

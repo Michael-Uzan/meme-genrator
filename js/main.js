@@ -13,7 +13,6 @@ function onInit() {
     addListeners()
 }
 
-////////////////////////////////////////////////////////
 // Event listners //
 
 function addListeners() {
@@ -79,7 +78,6 @@ function onSelectImage(photoId) {
     renderCanvas()
 }
 
-////////////////////////////////////////////////////////////////////////////////
 //  RENDER CANVAS
 
 function renderCanvas() {
@@ -126,7 +124,6 @@ function drawText(txt, x, y, size, color, font, align) {
 //     gCtx.stroke()
 // }
 
-//////////////////////////////////////////////////////////////////////////
 //  Text //
 
 function onType(txt) {
@@ -206,8 +203,7 @@ function cleanTxtLine() {
     document.querySelector('[name=text]').focus();
 }
 
-////////////////////////////////////////////////////////////////////////
-// SAVED MEME //
+// SAVED & LOAD MEME //
 
 function onSaveMeme() {
     if (!isCanvas()) return
@@ -217,4 +213,27 @@ function onSaveMeme() {
 function onLoadMeme() {
     gMeme = loadMeme()
     renderCanvas()
+}
+
+// CHANGED TAB //
+
+function onChangeTab(tab) {
+    var gallery = document.querySelector('body .gallery')
+    var editor = document.querySelector('body .editor')
+    var saved = document.querySelector('body .saved')
+    console.log('tab', tab)
+
+    if (tab === 'editor') {
+        saved.style.display = 'none';
+        gallery.style.display = 'none';
+        editor.style.display = 'flex';
+    } else if (tab === 'gallery') {
+        saved.style.display = 'none';
+        gallery.style.display = 'block';
+        editor.style.display = 'none';
+    } else if (tab === 'saved') {
+        saved.style.display = 'block';
+        gallery.style.display = 'none';
+        editor.style.display = 'none';
+    }
 }
