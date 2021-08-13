@@ -18,7 +18,7 @@
 
     <!-- HEADER -->
 
-    <header class="main-header main-layout flex direction-row align-center space-between theme-color">
+    <header id="top" class="main-header main-layout flex direction-row align-center space-between theme-color">
         <div class="logo flex  align-center"><img src="img/icons/LOGO.png" alt=""></div>
         <ul class="main-nav clean-list">
             <li class="active" onclick="onChangeTab('gallery'),activeNav(this),openRightNav()">Gallery</li>
@@ -64,6 +64,10 @@
             <canvas id="canvas"></canvas>
         </div>
         <div class="buttoms-canvas">
+
+            <input type="file" class="" name="upload-image" onchange="onImgInput(event)" />
+            <div class="share-container"></div>
+
             <input type="text" name="text" id="text" oninput="onType(this.value)" placeholder="type in a text">
             <div class="change-selected-line-idx" onclick="onChangeLineIdx()"><img
                     src="img/icons/up-and-down-opposite-double-arrows-side-by-side.png"></div>
@@ -94,7 +98,10 @@
 
             <div class="btn btn-save theme-color" onclick="onSaveMeme()">Save</div>
             <div class="btn btn-share theme-color">Share</div>
-            <div class="donload"><img src="img/icons/download.png"></div>
+
+            <div class="donload"><a href="#" onclick="onDownloadImg(this)" download="my-canvas.jpg"><img id="img-in-a"
+                        src="img/icons/download.png"></a></div>
+
         </div>
     </main>
 

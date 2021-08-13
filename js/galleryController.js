@@ -16,7 +16,7 @@ function renderImgs() {
         document.querySelector('.photos-container').style.display = 'grid';
         var strHTML = '';
         imgs.forEach((img) => {
-            strHTML += `<img onclick="onSelectImage(${img.id})" src="img/memes/${img.id}.jpg"></img>\n`
+            strHTML += `<a href="#top"><img onclick="onSelectImage(${img.id})" src="img/memes/${img.id}.jpg"></a>\n`
         });
         document.querySelector('.photos-container').innerHTML = strHTML;
     }
@@ -25,6 +25,7 @@ function renderImgs() {
 // SELECT IMG AND MOVE TO EDITOR
 
 function onSelectImage(photoId) {
+    gIsUpload = false;
     onChangeTab('editor');
     var navEl = document.querySelector('.active-img')
     activeNav(navEl)

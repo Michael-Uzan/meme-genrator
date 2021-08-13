@@ -3,7 +3,8 @@
 var gCtx;
 var gCanvas;
 var gStartPos;
-const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
+var gIsUpload = false;
 
 
 function onInitMeme() {
@@ -93,12 +94,17 @@ function getEvPos(ev) {
 //  RENDER CANVAS
 
 function renderCanvas() {
-    var currImg = getSelectedImage() // {id url keywords: [])
-    if (!currImg) {
-        drawText('Choose a photo', (gCanvas.height / 5), (gCanvas.height / 5), (gCanvas.height / 10), { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
-        return
+    if (!gIsUpload) {
+        var currImg = getSelectedImage() // {id url keywords: [])
+        if (!currImg) {
+            drawText('Choose a photo', (gCanvas.height / 5), (gCanvas.height / 5), (gCanvas.height / 10), { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
+            return
+        }
+        drawImgFromLocal(currImg.url)
+    } else {
+        var uploadImgURL = getUploadUrlIMG()
+        drawImgFromLocal(uploadImgURL)
     }
-    drawImgFromLocal(currImg.url)
     drawLines();
 }
 
@@ -236,12 +242,59 @@ function cleanTxtLine() {
 
 function onSaveMeme() {
     if (!isCanvas()) return
+    if (gIsUpload) {
+        const btn = document.querySelector('.btn-save');
+        btn.innerText = 'Can not!'
+        btn.style.color = 'red'
+        setTimeout(function () {
+            btn.innerText = 'Save'
+            btn.style.color = 'white'
+        }, 1200)
+        return
+    }
     saveMeme(gMeme, gCanvas)
 }
 
 function loadSavedMeme(meme) {
+    gIsUpload = false;
     gMeme = meme;
     cleanTxtLine();
     renderCanvas()
 }
 
+// DOWNLOAD CANVAS //
+
+function onDownloadImg(elLink) {
+    var imgContent = gCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
+
+
+// UPLAODING IMG //
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderImg)
+    resetMeme();
+    cleanTxtLine();
+    gIsUpload = true;
+    // setSelectedImg();
+    renderCanvas();
+
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    document.querySelector('.share-container').innerHTML = ''
+    var reader = new FileReader()
+
+    reader.onload = function (event) {
+        var img = new Image()
+        img.onload = onImageReady.bind(null, img)
+        img.src = event.target.result
+        saveUplaodImgURL(img.src) //
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+function renderImg(img) {
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+}

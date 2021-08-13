@@ -29,17 +29,11 @@
 
 .common-serach {
     align-items: center;
-    /* gap: 0 60px; */
-    /* padding-right: 50px; */
     font-size: 1.5rem;
 }
 
-.main-nav li {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    font-size: 1.187rem;
-    color: cornsilk;
+.common-serach li {
+    cursor: pointer;
 }
 
 /* NO SAVED MEME */

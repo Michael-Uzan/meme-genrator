@@ -33,6 +33,7 @@ canvas {
     width: 66%;
     object-fit: cover;
     margin-top: 0.6em;
+    cursor: pointer;
 }
 
 #text {
@@ -111,11 +112,16 @@ canvas {
     opacity: 0;
     height: 100%;
     width: 100%;
+    cursor: pointer;
 }
 
 .donload {
     grid-column: 1/2;
     grid-row: 7/8;
+}
+
+#img-in-a {
+    width: 100%;
 }
 
 .buttoms-canvas .btn {
@@ -130,11 +136,13 @@ canvas {
 .btn-save {
     grid-column: 2/4;
     grid-row: 7/8;
+    cursor: pointer;
 }
 
 .btn-share {
     grid-column: 4/6;
     grid-row: 7/8;
+    cursor: pointer;
 }
 
 /* RESPNOSIVE */

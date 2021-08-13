@@ -20,8 +20,8 @@ function renderSavedImgs() {
             strHTML += `<div>
             <img  src="${meme.canvasImg}"></img>
             <div class="btn-container">
-                <button onclick="onSelectMeme('${meme.id}')" class="btn">edit</button>
-                <button onclick="onDeleteMeme('${meme.id}')" class="btn">delete</button>
+            <a href="#top"><button onclick="onSelectMeme('${meme.id}')" class="btn">edit</button></a>
+            <button onclick="onDeleteMeme('${meme.id}')" class="btn">delete</button>
             </div>
         </div>`
         });

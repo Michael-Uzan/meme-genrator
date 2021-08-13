@@ -2,6 +2,7 @@
 
 var gImgs = createImgs();
 var gSearchStr = '';
+var gUrlUploadImg = '';
 
 //  CREATE IMGS //
 
@@ -47,6 +48,18 @@ function getImgs() {
 
 function search(strSearch) {
     gSearchStr = strSearch;
+}
+
+// Saving Upload IMG //
+
+function saveUplaodImgURL(imgSrc) {
+    console.log('img.src', imgSrc)
+    gUrlUploadImg = imgSrc;
+
+}
+
+function getUploadUrlIMG() {
+    return gUrlUploadImg
 }
 
 // KEYWORDS //

@@ -78,10 +78,6 @@ function resetMeme() {
     gMeme = _createMeme(canvas)
 }
 
-// function getMeme() {
-//     return gMeme;
-// }
-
 function setSelectedImg(photoId) {
     gMeme.selectedImgId = photoId;
 }
@@ -156,3 +152,5 @@ function changeLineIdx() {
 function getSelectedLine() {
     return gMeme.lines[gMeme.selectedLineIdx];
 }
+
+

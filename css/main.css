@@ -138,6 +138,7 @@ footer .logo {
         text-align: center;
         font-size: 1.187rem;
         color: rgb(228, 219, 183);
+        display: list-item;
     }
     .main-nav .active {
         color: rgb(255, 255, 255);
@@ -195,6 +196,7 @@ footer .logo {
         height: 100%;
         font-size: 1.187rem;
         color: cornsilk;
+        cursor: pointer;
     }
     .main-nav span {
         font-size: 1.187rem;
