@@ -18,7 +18,7 @@ function renderSavedImgs() {
         document.querySelector('.saved-container').style.display = 'grid';
         memes.forEach((meme) => {
             strHTML += `<div>
-            <img  src="img/memes/1.jpg"></img>
+            <img  src="${meme.canvasImg}"></img>
             <div class="btn-container">
                 <button onclick="onSelectMeme('${meme.id}')" class="btn">edit</button>
                 <button onclick="onDeleteMeme('${meme.id}')" class="btn">delete</button>

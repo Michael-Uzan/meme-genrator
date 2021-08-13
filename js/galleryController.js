@@ -8,11 +8,18 @@ function onInitImgs() {
 
 function renderImgs() {
     var imgs = getImgs();
-    var strHTML = '';
-    imgs.forEach((img, imgIndex) => {
-        strHTML += `<img onclick="onSelectImage(${imgIndex + 1})" src="img/memes/${imgIndex + 1}.jpg"></img>\n`
-    });
-    document.querySelector('.photos-container').innerHTML = strHTML;
+    if (!imgs.length) {
+        document.querySelector('.no-search-items').style.display = 'block';
+        document.querySelector('.photos-container').style.display = 'none';
+    } else {
+        document.querySelector('.no-search-items').style.display = 'none';
+        document.querySelector('.photos-container').style.display = 'grid';
+        var strHTML = '';
+        imgs.forEach((img) => {
+            strHTML += `<img onclick="onSelectImage(${img.id})" src="img/memes/${img.id}.jpg"></img>\n`
+        });
+        document.querySelector('.photos-container').innerHTML = strHTML;
+    }
 }
 
 // SELECT IMG AND MOVE TO EDITOR
@@ -42,6 +49,9 @@ function onChangeTab(tab) {
         changeToEditorWindow()
     } else if (tab === 'gallery') {
         gallery.style.display = 'block';
+        document.querySelector('[name=serch-input]').value = '';
+        search('') // display all photos
+        renderImgs()
     } else if (tab === 'saved') { saved.style.display = 'block'; }
 
 }
@@ -63,4 +73,13 @@ function activeNav(navEl) {
 
 function openRightNav() {
     document.querySelector('body').classList.toggle('menu-open');
+}
+
+// SEARCH //
+
+function onSearch() {
+    var strSearch = document.querySelector('[name=serch-input]').value.toLowerCase()
+    console.log('strSearch', strSearch)
+    search(strSearch)
+    renderImgs()
 }

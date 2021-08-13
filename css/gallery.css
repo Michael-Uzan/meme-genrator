@@ -1,3 +1,17 @@
+/* NO SAVED MEME */
+
+.no-search-items {
+    display: none;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    height: 645px;
+    text-align: center;
+}
+
+.no-search-items h1 {
+    padding-top: 200px;
+}
+
 /* GALLARY */
 
 .photos-container {

@@ -29,19 +29,24 @@
         <button class="btn-menu-toggle theme-color" onclick="openRightNav()">☰</button>
     </header>
 
-    <!-- HOME -->
+    <!-- GALLERY HOME -->
 
     <main class="gallery">
 
-        <!-- <section class="serch">
-        <input type="text" name="serch-input" id="serch-input" placeholder="Enter serach keyword">
-        <ul class="common-serach clean-list">
-            <li>funny</li>
-            <li>Comics</li>
-            <li>digs</li>
-            <li>drinks</li>
-        </ul>
-    </section> -->
+        <section class="serch">
+            <input oninput="onSearch()" type="text" name="serch-input" id="serch-input"
+                placeholder="Enter serach keyword">
+            <ul class="common-serach clean-list">
+                <li>funny</li>
+                <li>Comics</li>
+                <li>digs</li>
+                <li>drinks</li>
+            </ul>
+        </section>
+
+        <div class="no-search-items">
+            <h1>Sorry, no search results</h1>
+        </div>
 
         <section class="photos-container main-layout">
             <!-- RENDER PHOTOS -->
@@ -98,16 +103,7 @@
         </div>
         <section class="saved-container main-layout">
             <!-- RENDER PHOTOS -->
-            <!-- <div>
-                <img onclick="onDeleteMeme('${meme.id}')" src="img/memes/1.jpg"></img>
-                <div class="btn-container">
-                    <button class="btn">edit</button><button class="btn">delete</button>
-                </div>
-            </div> -->
         </section>
-
-
-        <!-- <div class="save-meme" onclick="onLoadMeme()">Load Meme</div> -->
     </main>
 
     <!-- FOOTER -->
