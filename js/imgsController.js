@@ -37,6 +37,7 @@ function onChangeTab(tab) {
     editor.style.display = 'none';
     if (tab === 'editor') {
         editor.style.display = 'flex';
+        changeToEditorWindow()
     } else if (tab === 'gallery') {
         gallery.style.display = 'block';
     } else if (tab === 'saved') { saved.style.display = 'block'; }

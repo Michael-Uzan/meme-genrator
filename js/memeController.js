@@ -10,17 +10,15 @@ function onInitMeme() {
     gCanvas = document.getElementById('canvas');
     gCtx = gCanvas.getContext('2d');
     resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-    window.addEventListener('resize', (ev) => {
-        console.log('ev', ev);
-        resizeCanvas()
-        // Debouncing?..
-        // drawText('Nothing like a good stretch ' + Date.now(), 0, 225)
-    })
-    drawText('Choose a photo', (gCanvas.height / 5), (gCanvas.height / 5), (gCanvas.height / 10), { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
     addListeners()
-
+    // window.addEventListener('resize', resizeCanvas)
+    // window.addEventListener('resize', (ev) => {
+    //     console.log('ev', ev);
+    //     resizeCanvas()
+    // })
 }
+
+// RESIZE CANVAS //
 
 function resizeCanvas() {
     var elContainer = document.querySelector('.canvas-container');
@@ -31,9 +29,19 @@ function resizeCanvas() {
     gCanvas.height = elContainer.offsetHeight
 }
 
+function changeToEditorWindow() {
+    resizeCanvas()
+    renderCanvas()
+}
+
 // Event listners //
 
 function addListeners() {
+    // Canvas Dimenestion
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+        renderCanvas()
+    })
     // Mouse 
     gCanvas.addEventListener('mousedown', onDown)
     gCanvas.addEventListener('mousemove', onMove)
@@ -93,6 +101,10 @@ function getEvPos(ev) {
 
 function renderCanvas() {
     var currImg = getSelectedImage() // {id url keywords: [])
+    if (!currImg) {
+        drawText('Choose a photo', (gCanvas.height / 5), (gCanvas.height / 5), (gCanvas.height / 10), { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
+        return
+    }
     drawImgFromLocal(currImg.url)
     drawLines();
 }
