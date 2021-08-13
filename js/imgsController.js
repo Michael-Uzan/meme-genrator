@@ -19,6 +19,8 @@ function renderImgs() {
 
 function onSelectImage(photoId) {
     onChangeTab('editor');
+    var navEl = document.querySelector('.active-img')
+    activeNav(navEl)
     resetMeme();
     cleanTxtLine();
     setSelectedImg(photoId);

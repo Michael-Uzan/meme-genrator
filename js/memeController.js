@@ -220,7 +220,7 @@ function RenderSelectedLine() {
     var selectedLine = getSelectedLine()
     // render Text
     document.querySelector('[name=text]').value = selectedLine.txt;
-    document.querySelector('[name=text]').focus();
+    // document.querySelector('[name=text]').focus();
     // render Color
     document.querySelector('[name=text-outline-color]').value = selectedLine.color.outLineColor
     document.querySelector('[name=text-fill-color]').value = selectedLine.color.fillColor
@@ -230,7 +230,7 @@ function RenderSelectedLine() {
 
 function cleanTxtLine() {
     document.querySelector('[name=text]').value = '';
-    document.querySelector('[name=text]').focus();
+    // document.querySelector('[name=text]').focus();
 }
 
 // SAVED & LOAD MEME //
