@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/gallery.css">
     <link rel="stylesheet" href="css/editor.css">
+    <link rel="stylesheet" href="css/savedMemes.css">
     <title>Meme Generator</title>
 </head>
 
-<body onload="onInitImgs(),onInitMeme()">
+<body onload="onInitImgs(),onInitMeme(),onInitSaved()">
     <!-- MENU SVREEN -->
     <div class="screen pointer" onclick="openRightNav()"></div>
 
@@ -22,7 +23,7 @@
         <ul class="main-nav clean-list">
             <li class="active" onclick="onChangeTab('gallery'),activeNav(this),openRightNav()">Gallery</li>
             <li class="active-img" onclick="onChangeTab('editor'),activeNav(this),openRightNav()">Editor</li>
-            <li onclick="onChangeTab('saved'),activeNav(this),openRightNav()">Saved</li><span>|</span>
+            <li onclick="onChangeTab('saved'),activeNav(this),openRightNav(),onInitSaved()">Saved</li><span>|</span>
             <li>About</li>
         </ul>
         <button class="btn-menu-toggle theme-color" onclick="openRightNav()">☰</button>
@@ -83,17 +84,28 @@
             </div>
             <div class="img-color-fill"><img src="img/icons/paint-board-and-brush.png"></div>
 
-            <div class="btn btn-save theme-color">Save</div>
+            <div class="btn btn-save theme-color" onclick="onSaveMeme()">Save</div>
             <div class="btn btn-share theme-color">Share</div>
             <div class="donload"><img src="img/icons/download.png"></div>
         </div>
     </main>
 
     <!-- SAVED -->
-    <main class="saved">Saved
-        <div class="save-meme" onclick="onSaveMeme()">Save Meme</div>
-        <div class="save-meme" onclick="onLoadMeme()">Load Meme</div>
+
+    <main class="saved main-layout">
+
+        <section class="saved-container main-layout">
+            <!-- RENDER PHOTOS -->
+            <div class="photo"><img src="" alt="">
+                <div class="edit-canvas">edit</div>
+                <div class="delete-canvas">delete</div>
+            </div>
+        </section>
+
+
+        <!-- <div class="save-meme" onclick="onLoadMeme()">Load Meme</div> -->
     </main>
+
     <!-- FOOTER -->
 
     <footer class="main-footer main-layout flex direction-col theme-color">
@@ -101,12 +113,14 @@
         <p> &#169; Michael Uzan</p>
     </footer>
 
+    <script src="js/utils.js"></script>
     <script src="js/service/storageService.js"></script>
-    <script src="js/service/imgService.js"></script>
-    <script src="js/service/memeService.js"></script>
-    <!-- <script src="js/service/userMemesService.js"></script> -->
-    <script src="js/imgsController.js"></script>
-    <script src="js/memeController.js"></script>
+    <script src="js/service/galleryService.js"></script>
+    <script src="js/service/editorService.js"></script>
+    <script src="js/service/savedMemesService.js"></script>
+    <script src="js/galleryController.js"></script>
+    <script src="js/editorController.js"></script>
+    <script src="js/savedMemeController.js"></script>
     <!-- <script src="js/userMemesController.js"></script> -->
 </body>
 

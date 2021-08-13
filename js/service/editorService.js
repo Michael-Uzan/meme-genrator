@@ -5,27 +5,15 @@ var gMeme;// = createMeme();
 // CREATE MEME
 
 function _createMeme(canvas) {
-    console.log('canvas', canvas)
-    console.log('canvas.height', canvas.height)
-    console.log('canvas.width', canvas.width)
     var line = _createLine(0, canvas.height, canvas.width, 'left')
     return {
+        id: '',
+        canvasImg: '',
         isCanvas: false,
         selectedImgId: false,
         selectedLineIdx: 0,
         isDrag: false,
         lines: [line]
-        //  [
-        //     {
-        //         txt: '',
-        //         fontSize: 70,
-        //         font: 'Impact',
-        //         textAlign: 'left',
-        //         color: { outLineColor: '#000000', fillColor: '#ffffff' },
-        //         position: { x: 100, y: 100 },
-        //         isDrag: false
-        //     }
-        // ]
     }
 }
 

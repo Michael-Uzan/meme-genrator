@@ -227,7 +227,6 @@ function RenderSelectedLine() {
     document.querySelector('#fonts').value = selectedLine.font
 }
 
-
 function cleanTxtLine() {
     document.querySelector('[name=text]').value = '';
     // document.querySelector('[name=text]').focus();
@@ -237,11 +236,17 @@ function cleanTxtLine() {
 
 function onSaveMeme() {
     if (!isCanvas()) return
-    saveMeme(gMeme)
+    saveMeme(gMeme, gCanvas)
 }
 
-function onLoadMeme() {
-    gMeme = loadMeme()
+// function onLoadMeme() {
+//     gMeme = loadMeme()
+//     renderCanvas()
+// }
+
+function loadSavedMeme(meme) {
+    gMeme = meme;
+    cleanTxtLine();
     renderCanvas()
 }
 
