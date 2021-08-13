@@ -65,8 +65,6 @@
         </div>
         <div class="buttoms-canvas">
 
-            <input type="file" class="" name="upload-image" onchange="onImgInput(event)" />
-            <div class="share-container"></div>
 
             <input type="text" name="text" id="text" oninput="onType(this.value)" placeholder="type in a text">
             <div class="change-selected-line-idx" onclick="onChangeLineIdx()"><img
@@ -97,10 +95,17 @@
             <div class="img-color-fill"><img src="img/icons/paint-board-and-brush.png"></div>
 
             <div class="btn btn-save theme-color" onclick="onSaveMeme()">Save</div>
-            <div class="btn btn-share theme-color">Share</div>
+            <div onclick="onShareImage()" class="share-canvas"><img src="img/icons/share.png"></div>
 
             <div class="donload"><a href="#" onclick="onDownloadImg(this)" download="my-canvas.jpg"><img id="img-in-a"
                         src="img/icons/download.png"></a></div>
+
+            <!-- <div class="upload"></div> -->
+            <input type="file" class="upload-image" name="upload-image" onchange="onImgInput(event)" />
+            <div class="img-upload"><img src="img/icons/upload.png"></div>
+        </div>
+
+        <div class="share-container"></div> <!-- for upload img -->
 
         </div>
     </main>

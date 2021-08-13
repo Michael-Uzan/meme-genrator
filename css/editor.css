@@ -124,6 +124,17 @@ canvas {
     width: 100%;
 }
 
+.upload-image {
+    grid-column: 2/3;
+    grid-row: 7/8;
+    opacity: 0;
+}
+
+.img-upload {
+    grid-column: 2/3;
+    grid-row: 7/8;
+}
+
 .buttoms-canvas .btn {
     font-family: montserrat;
     font-size: 1.4rem;
@@ -134,13 +145,13 @@ canvas {
 }
 
 .btn-save {
-    grid-column: 2/4;
+    grid-column: 3/5;
     grid-row: 7/8;
     cursor: pointer;
 }
 
-.btn-share {
-    grid-column: 4/6;
+.share-canvas {
+    grid-column: 5/6;
     grid-row: 7/8;
     cursor: pointer;
 }

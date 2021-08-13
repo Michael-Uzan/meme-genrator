@@ -298,3 +298,29 @@ function loadImageFromInput(ev, onImageReady) {
 function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
 }
+
+function onShareImage() {
+    if (!isCanvas()) return
+    var imgCanvasToShare = gCanvas.toDataURL('image/jpeg')
+    console.log('imgCanvasToShare', imgCanvasToShare)
+    shareImage(imgCanvasToShare)
+}
+
+async function shareImage(imgCanvasToShare) {
+    const response = await fetch(imgCanvasToShare);
+    const blob = await response.blob();
+    const filesArray = [
+        new File(
+            [blob],
+            'meme.jpg',
+            {
+                type: "image/jpeg",
+                lastModified: new Date().getTime()
+            }
+        )
+    ];
+    const shareData = {
+        files: filesArray,
+    };
+    navigator.share(shareData);
+}
