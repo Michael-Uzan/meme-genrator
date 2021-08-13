@@ -239,11 +239,6 @@ function onSaveMeme() {
     saveMeme(gMeme, gCanvas)
 }
 
-// function onLoadMeme() {
-//     gMeme = loadMeme()
-//     renderCanvas()
-// }
-
 function loadSavedMeme(meme) {
     gMeme = meme;
     cleanTxtLine();

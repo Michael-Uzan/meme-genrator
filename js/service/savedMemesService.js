@@ -30,3 +30,11 @@ function getSelectedMeme(memeId) {
     })
     return gSavedMemes.savedMemes[memeIdx];
 }
+
+function deleteMeme(memeId) {
+    var memeIdx = gSavedMemes.savedMemes.findIndex(function (meme) {
+        return memeId === meme.id
+    })
+    gSavedMemes.savedMemes.splice(memeIdx, 1)
+    saveToStorage(DataBaseKey, gSavedMemes)
+}

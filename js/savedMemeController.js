@@ -11,14 +11,19 @@ function renderSavedImgs() {
     var memes = getSavedMemes();
     var strHTML = '';
     if (!memes.length) {
-        strHTML = `<div class="no-saved-items">
-                            <h1>Sorry, no saved memes</h1>
-                        </div>`
-        document.querySelector('.saved-container').innerHTML = strHTML;
+        document.querySelector('.no-saved-items').style.display = 'block';
+        document.querySelector('.saved-container').style.display = 'none';
     } else {
+        document.querySelector('.no-saved-items').style.display = 'none';
+        document.querySelector('.saved-container').style.display = 'grid';
         memes.forEach((meme) => {
-            strHTML += `
-            <img onclick="onSelectMeme('${meme.id}')" src="${meme.canvasImg}"></img>\n`
+            strHTML += `<div>
+            <img  src="img/memes/1.jpg"></img>
+            <div class="btn-container">
+                <button onclick="onSelectMeme('${meme.id}')" class="btn">edit</button>
+                <button onclick="onDeleteMeme('${meme.id}')" class="btn">delete</button>
+            </div>
+        </div>`
         });
         document.querySelector('.saved-container').innerHTML = strHTML;
     }
@@ -32,5 +37,7 @@ function onSelectMeme(memeId) {
     loadSavedMeme(meme)
 }
 
-// function onSelectImage(photoId) {
-// }
+function onDeleteMeme(memeId) {
+    deleteMeme(memeId)
+    renderSavedImgs()
+}
