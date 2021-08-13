@@ -1,45 +1,48 @@
 'use strict'
-var gMeme = createMeme();
+var gMeme;// = createMeme();
 
 
 // CREATE MEME
 
-function createMeme() {
+function _createMeme(canvas) {
+    console.log('canvas', canvas)
+    console.log('canvas.height', canvas.height)
+    console.log('canvas.width', canvas.width)
+    var line = _createLine(0, canvas.height, canvas.width, 'left')
     return {
         isCanvas: false,
         selectedImgId: false,
         selectedLineIdx: 0,
         isDrag: false,
-        lines: [
-            {
-                txt: '',
-                fontSize: 70,
-                font: 'Impact',
-                textAlign: 'left',
-                color: { outLineColor: '#000000', fillColor: '#ffffff' },
-                position: { x: 100, y: 100 },
-                isDrag: false
-            }
-        ]
+        lines: [line]
+        //  [
+        //     {
+        //         txt: '',
+        //         fontSize: 70,
+        //         font: 'Impact',
+        //         textAlign: 'left',
+        //         color: { outLineColor: '#000000', fillColor: '#ffffff' },
+        //         position: { x: 100, y: 100 },
+        //         isDrag: false
+        //     }
+        // ]
     }
 }
 
 function _createLine(linesCount, height, width, align) {
-    console.log(' linesCount', linesCount)
-
     if (linesCount % 2 === 0) {
-        var y = 100 + linesCount * 40;
+        var y = height / 8 + linesCount * 40;
     } else {
-        var y = height - 100 - (linesCount - 1) * 40;
+        var y = height - height / 8 - (linesCount - 1) * 40;
     }
-    if (align === 'left') var x = 100;
+    if (align === 'left') var x = (width / 10);
     if (align === 'center') var x = width / 2;
-    if (align === 'right') var x = width - 100;
+    if (align === 'right') var x = width - (width / 10);
 
     const position = { x: x, y: y };
     return {
-        txt: '',
-        fontSize: 70,
+        txt: 'txt here',
+        fontSize: height / 7.5,
         font: 'Impact',
         textAlign: align,
         color: { outLineColor: '#000000', fillColor: '#ffffff' },
@@ -51,7 +54,7 @@ function _createLine(linesCount, height, width, align) {
 // IS BOOLEAN?
 
 function isCanvas() {
-    return gMeme.selectedImgId;
+    return gMeme; ///////////////////////////////////////////////////////////
 }
 
 function isLineClicked(clickedPos) {
@@ -83,12 +86,13 @@ function getMeme() {
 }
 
 function resetMeme() {
-    gMeme = createMeme()
+    var canvas = getCanvas()
+    gMeme = _createMeme(canvas)
 }
 
-function getMeme() {
-    return gMeme;
-}
+// function getMeme() {
+//     return gMeme;
+// }
 
 function setSelectedImg(photoId) {
     gMeme.selectedImgId = photoId;
@@ -97,12 +101,16 @@ function setSelectedImg(photoId) {
 // TEXT SERVICE
 
 function updateTxtLine(txt) {
+    // if (!gMeme) gMeme = createMeme();
     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
 function plusFont(diff) {
     var fontSize = gMeme.lines[gMeme.selectedLineIdx].fontSize
-    if (fontSize === 25 || fontSize === 150) return
+    if ((fontSize === 25 && diff < 0)
+        || (fontSize === 150 && diff > 0)) {
+        diff = 0;
+    }
     gMeme.lines[gMeme.selectedLineIdx].fontSize += diff
 }
 
@@ -116,6 +124,11 @@ function ChangeFont(font) {
 
 function textAlign(align) {
     gMeme.lines[gMeme.selectedLineIdx].textAlign = align
+    var canvas = getCanvas()
+    if (align === 'left') var x = (canvas.width / 10);
+    if (align === 'center') var x = canvas.width / 2;
+    if (align === 'right') var x = canvas.width - (canvas.width / 10);
+    gMeme.lines[gMeme.selectedLineIdx].position.x = x; //position: { x: 100, y: 100 },
 }
 
 function getDragLine() {
@@ -139,7 +152,10 @@ function addText(height, width) {
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 function deleteText() {
-    if (gMeme.lines.length === 1) return
+    if (gMeme.lines.length === 1) {
+        gMeme.lines[gMeme.selectedLineIdx].txt = '';
+        return
+    }
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }

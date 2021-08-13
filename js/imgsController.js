@@ -18,11 +18,11 @@ function renderImgs() {
 // SELECT IMG AND MOVE TO EDITOR
 
 function onSelectImage(photoId) {
+    onChangeTab('editor');
     resetMeme();
     cleanTxtLine();
     setSelectedImg(photoId);
     renderCanvas();
-    onChangeTab('editor');
 }
 
 // CHANGED TAB //

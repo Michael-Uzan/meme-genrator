@@ -20,6 +20,7 @@ function createImgs() {
 
 function getSelectedImage() {
     var meme = getMeme();
+    if (!meme) return
     var photoIdx = gImgs.findIndex(function (img) {
         return meme.selectedImgId === img.id
     })

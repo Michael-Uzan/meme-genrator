@@ -11,21 +11,13 @@ function onInitMeme() {
     gCtx = gCanvas.getContext('2d');
     resizeCanvas()
     addListeners()
-    // window.addEventListener('resize', resizeCanvas)
-    // window.addEventListener('resize', (ev) => {
-    //     console.log('ev', ev);
-    //     resizeCanvas()
-    // })
 }
 
 // RESIZE CANVAS //
 
 function resizeCanvas() {
     var elContainer = document.querySelector('.canvas-container');
-    // Note: changing the canvas dimension this way clears the canvas
     gCanvas.width = elContainer.offsetWidth
-    // gCanvas.width = elContainer.offsetWidth - 20
-    // Unless needed, better keep height fixed.
     gCanvas.height = elContainer.offsetHeight
 }
 
@@ -63,20 +55,21 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
+    if (!isCanvas()) return
     const line = getDragLine();
-    if (!line) return;
     if (line.isDrag) {
-
         const pos = getEvPos(ev)
         const dx = pos.x - gStartPos.x
         const dy = pos.y - gStartPos.y
         moveLine(dx, dy)
         gStartPos = pos
         renderCanvas()
+        renderRecEditor(line)
     }
 }
 
 function onUp() {
+    renderCanvas()
     setFlaseLineDrag()
     document.body.style.cursor = 'auto'
 }
@@ -110,6 +103,7 @@ function renderCanvas() {
 }
 
 function drawLines() {
+    if (!isCanvas()) return
     var meme = getMeme();
     meme.lines.forEach(line => {
 
@@ -121,10 +115,6 @@ function drawImgFromLocal(imgUrl) {
     var img = new Image()
     img.src = imgUrl;
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
-
-    // img.onload = () => {
-    //     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
-    // }
 }
 
 function drawText(txt, x, y, size, color, font, align) {
@@ -137,15 +127,31 @@ function drawText(txt, x, y, size, color, font, align) {
     gCtx.strokeText(txt, x, y)
 }
 
-// function drawRect(x, y, colors,) {
-//     // const { outline, fill } = colors
-//     gCtx.beginPath()
-//     gCtx.rect(x, y, 10 + diff, 10 + diff)
-//     // gCtx.fillStyle = fill
-//     // gCtx.fillRect(x, y, 10 + diff, 10 + diff)
-//     gCtx.strokeStyle = outline
-//     gCtx.stroke()
-// }
+function renderRecEditor(line) {
+    if (line.textAlign === 'left') {
+        drawRect((line.position.x - 10), (line.position.y - (1 * line.fontSize)),
+            line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
+    }
+    if (line.textAlign === 'center') {
+        drawRect((line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize / 2)), (line.position.y - (1 * line.fontSize)),
+            line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
+    }
+    if (line.textAlign === 'right') {
+        drawRect((line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize)), (line.position.y - (1 * line.fontSize)),
+            line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
+    }
+}
+
+function drawRect(x, y, width, height) {
+    gCtx.beginPath()
+    gCtx.rect(x, y, width, height)
+    gCtx.strokeStyle = '#ffffff';
+    gCtx.stroke()
+}
+
+function getCanvas() {
+    return gCanvas;
+}
 
 //  Text //
 
@@ -187,7 +193,8 @@ function onChangeColor() {
 function onAddText() {
     if (!isCanvas()) return
     addText(gCanvas.height, gCanvas.width)
-    cleanTxtLine()
+    RenderSelectedLine()
+    renderCanvas();
 }
 
 function onDeleteText() {
