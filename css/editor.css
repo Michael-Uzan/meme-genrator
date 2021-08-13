@@ -44,6 +44,10 @@ canvas {
     font-size: 1.4rem;
 }
 
+#text:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
 .change-selected-line-idx {
     grid-column: 2 /3;
     grid-row: 2/3;

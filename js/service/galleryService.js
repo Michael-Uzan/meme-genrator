@@ -51,8 +51,6 @@ function search(strSearch) {
 
 // KEYWORDS //
 
-// funny comics dogs drinks books
-
 gImgs[0].keywords = ['trump', 'angry', 'told you', 'america', 'usa'];
 gImgs[1].keywords = ['dogs', 'cats', 'cute', 'animals', 'puppy', 'puppies'];
 gImgs[2].keywords = ['dogs', 'cats', 'cute', 'animals', 'puppy', 'puppies', 'baby', 'babies', 'kids', 'sleep'];

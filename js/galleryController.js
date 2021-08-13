@@ -79,7 +79,11 @@ function openRightNav() {
 
 function onSearch() {
     var strSearch = document.querySelector('[name=serch-input]').value.toLowerCase()
-    console.log('strSearch', strSearch)
     search(strSearch)
+    renderImgs()
+}
+
+function setWordSearch(wordSearch) {
+    search(wordSearch)
     renderImgs()
 }

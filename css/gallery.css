@@ -1,3 +1,47 @@
+/* SEARCH */
+
+.search {
+    height: 105px;
+    align-items: center;
+}
+
+/* SEARCH INPUT */
+
+.search input {
+    height: 25px;
+    font-family: montserrat;
+    font-size: 1.187rem;
+    border: 0px solid white;
+    box-shadow: 0 2px 0 rgb(214, 211, 211)
+}
+
+.search input:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+.search img {
+    width: 25px;
+    object-fit: contain;
+    border-bottom: 2px solid rgb(214, 211, 211);
+}
+
+/* TITLES WORDS */
+
+.common-serach {
+    align-items: center;
+    /* gap: 0 60px; */
+    /* padding-right: 50px; */
+    font-size: 1.5rem;
+}
+
+.main-nav li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 1.187rem;
+    color: cornsilk;
+}
+
 /* NO SAVED MEME */
 
 .no-search-items {
@@ -38,6 +82,20 @@
         padding-top: 20px;
         padding-bottom: 20px;
     }
+    /* SEARCH */
+    .search {
+        justify-content: space-between;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    /* SEARCH WORDS */
+    .common-serach {
+        gap: 0 10px;
+        padding-bottom: 20px;
+    }
+    .common-serach li:nth-child(5) {
+        display: none;
+    }
 }
 
 /* SMALL  */
@@ -49,6 +107,17 @@
         grid-gap: 20px;
         justify-content: center;
         padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    /* SEARCH */
+    .search {
+        justify-content: space-between;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    /* SEARCH WORDS */
+    .common-serach {
+        gap: 0 15px;
         padding-bottom: 20px;
     }
 }
@@ -64,6 +133,20 @@
         padding-top: 30px;
         padding-bottom: 30px;
     }
+    /* SEARCH */
+    .search {
+        flex-direction: row;
+        margin-top: 0px;
+    }
+    .search input {
+        margin-left: 50px;
+    }
+    /* SEARCH WORDS */
+    .common-serach {
+        gap: 0 15px;
+        padding-right: 50px;
+        padding-bottom: 0px;
+    }
 }
 
 /* Desktop */
@@ -74,5 +157,14 @@
         grid-template-rows: 275px 275px 275px;
         padding-top: 30px;
         padding-bottom: 30px;
+    }
+    /* SEARCH */
+    .search input {
+        margin-left: 50px;
+    }
+    /* SEARCH WORDS */
+    .common-serach {
+        gap: 0 60px;
+        padding-right: 50px;
     }
 }

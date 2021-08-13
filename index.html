@@ -33,14 +33,17 @@
 
     <main class="gallery">
 
-        <section class="serch">
-            <input oninput="onSearch()" type="text" name="serch-input" id="serch-input"
-                placeholder="Enter serach keyword">
-            <ul class="common-serach clean-list">
-                <li>funny</li>
-                <li>Comics</li>
-                <li>digs</li>
-                <li>drinks</li>
+        <section class="search main-layout flex">
+            <div class="flex direction-row">
+                <input oninput="onSearch()" type="text" name="serch-input" id="serch-input" size="20"
+                    placeholder="Enter serach keyword"><img src="img/icons/search-icon.png">
+            </div>
+            <ul class="common-serach clean-list flex direction-row space-between">
+                <li onclick="setWordSearch('')">all</li>
+                <li onclick="setWordSearch('funny')">funny</li>
+                <li onclick="setWordSearch('kids')">kids</li>
+                <li onclick="setWordSearch('animals')">animals</li>
+                <li onclick="setWordSearch('victory')">victory</li>
             </ul>
         </section>
 
