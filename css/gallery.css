@@ -73,7 +73,7 @@
 }
 
 .me-photo {
-    margin-left: 50px;
+    /* margin-left: 50px; */
     width: 220px;
     height: 220px;
     border-radius: 50%;
@@ -87,10 +87,6 @@
     margin: 10px;
     object-fit: contain;
     cursor: pointer;
-}
-
-.text {
-    margin-left: 30px;
 }
 
 .text p, .text h2 {
@@ -129,7 +125,6 @@
         flex-direction: column;
     }
     .text {
-        /* margin-left: 30px; */
         text-align: center;
     }
     .links-countainer {
@@ -158,6 +153,13 @@
     .common-serach {
         gap: 0 15px;
         padding-bottom: 20px;
+    }
+    /* ABOUT */
+    .text {
+        margin-left: 30px;
+    }
+    .me-photo {
+        margin-left: 50px;
     }
 }
 
