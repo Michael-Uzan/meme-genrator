@@ -1,11 +1,15 @@
 'use strict'
+// let gIsChangeTextSize;
+// let handleSize = 15;
+
 var gMeme;// = createMeme();
+const gStickers = ['img/stickers/S1.png', 'img/stickers/S2.png', 'img/stickers/S3.png'];
 
 
 // CREATE MEME
 
 function _createMeme(canvas) {
-    var line = _createLine(0, canvas.height, canvas.width, 'left')
+    var line = _createLine(0, canvas.height, canvas.width, 'left', false, 0)
     return {
         id: '',
         canvasImg: '',
@@ -13,11 +17,11 @@ function _createMeme(canvas) {
         selectedImgId: false,
         selectedLineIdx: 0,
         isDrag: false,
-        lines: [line]
+        lines: [line],
     }
 }
 
-function _createLine(linesCount, height, width, align) {
+function _createLine(linesCount, height, width, align, isStiker = false, id) {
     if (linesCount % 2 === 0) {
         var y = height / 8 + linesCount * 40;
     } else {
@@ -35,7 +39,18 @@ function _createLine(linesCount, height, width, align) {
         textAlign: align,
         color: { outLineColor: '#000000', fillColor: '#ffffff' },
         position: position,
-        isDrag: false
+        isDrag: false,
+        isStiker: (isStiker) ? _createStiker(height, width, id) : false
+    }
+}
+
+function _createStiker(height, width, id) { //stiker.widthX, stiker.heightY
+    return {
+        position: { x: width / 3, y: height / 3 },
+        // isDrag: false,
+        url: gStickers[id],
+        widthX: (width / 5),
+        heightY: (height / 5)
     }
 }
 
@@ -45,19 +60,34 @@ function isCanvas() {
     return gMeme; ///////////////////////////////////////////////////////////
 }
 
+// function isStikerClicked(clickedPos) {
+//     if (!gMeme) return false;
+//     var stikerIdx = gMeme.stikers.findIndex(function (stiker) {
+//         return (clickedPos.x > stiker.position.x) && (clickedPos.x < stiker.widthX)
+//             && (clickedPos.y > stiker.heightY) && (clickedPos.y < stiker.heightY)
+//     })
+
+// }
+
 function isLineClicked(clickedPos) {
+    if (!gMeme) return false;
 
     var lineIdx = gMeme.lines.findIndex(function (line) {
-        if (line.textAlign === 'left') {
-            return (clickedPos.x > line.position.x) && (clickedPos.x < (line.position.x + ((line.fontSize / 2) * line.txt.length))) &&
-                (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
-        } else if (line.textAlign === 'center') {
-            const helfWordPx = ((line.fontSize / 2) * line.txt.length) / 2;
-            return (clickedPos.x > (line.position.x - helfWordPx)) && (clickedPos.x < (line.position.x + helfWordPx)) &&
-                (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
-        } else {
-            return (clickedPos.x > (line.position.x - ((line.fontSize / 2) * line.txt.length))) & (clickedPos.x < line.position.x) &&
-                (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
+        if (!line.isStiker) {
+            if (line.textAlign === 'left') {
+                return (clickedPos.x > line.position.x) && (clickedPos.x < (line.position.x + ((line.fontSize / 2) * line.txt.length))) &&
+                    (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
+            } else if (line.textAlign === 'center') {
+                const helfWordPx = ((line.fontSize / 2) * line.txt.length) / 2;
+                return (clickedPos.x > (line.position.x - helfWordPx)) && (clickedPos.x < (line.position.x + helfWordPx)) &&
+                    (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
+            } else {
+                return (clickedPos.x > (line.position.x - ((line.fontSize / 2) * line.txt.length))) & (clickedPos.x < line.position.x) &&
+                    (clickedPos.y < line.position.y) && (clickedPos.y > (line.position.y - line.fontSize));
+            }
+        } else if (line.isStiker) {
+            return (clickedPos.x > line.isStiker.position.x) && (clickedPos.x < (line.isStiker.position.x + line.isStiker.widthX))
+                && (clickedPos.y > line.isStiker.position.y) && (clickedPos.y < (line.isStiker.position.y + line.isStiker.heightY))
         }
     })
     if (lineIdx === -1) return false;
@@ -86,7 +116,13 @@ function setSelectedImg(photoId) {
 
 function updateTxtLine(txt) {
     // if (!gMeme) gMeme = createMeme();
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+    if (!gMeme.lines[gMeme.selectedLineIdx].isStiker) {
+        gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+    } else {
+        gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+        gMeme.lines[gMeme.selectedLineIdx].isStiker = false;
+
+    }
 }
 
 function plusFont(diff) {
@@ -124,6 +160,11 @@ function moveLine(dx, dy) {
     gMeme.lines[gMeme.selectedLineIdx].position.y += dy
 }
 
+function moveLineStiker(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].isStiker.position.x += dx
+    gMeme.lines[gMeme.selectedLineIdx].isStiker.position.y += dy
+}
+
 function setFlaseLineDrag() {
     if (!gMeme.isDrag) return
     gMeme.lines[gMeme.selectedLineIdx].isDrag = false;
@@ -131,8 +172,13 @@ function setFlaseLineDrag() {
     gMeme.isDrag = false;
 }
 
+function addStiker(height, width, id) {
+    gMeme.lines.push(_createLine(gMeme.lines.length, height, width, 'left', true, id))
+    gMeme.selectedLineIdx = gMeme.lines.length - 1;
+}
+
 function addText(height, width) {
-    gMeme.lines.push(_createLine(gMeme.lines.length, height, width, gMeme.lines[gMeme.selectedLineIdx].textAlign))
+    gMeme.lines.push(_createLine(gMeme.lines.length, height, width, gMeme.lines[gMeme.selectedLineIdx].textAlign, false, 0))
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 function deleteText() {

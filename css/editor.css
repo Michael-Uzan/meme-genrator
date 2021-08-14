@@ -115,6 +115,20 @@ canvas {
     cursor: pointer;
 }
 
+.buttoms-canvas .stikers-countainer {
+    grid-column: 1/6;
+    grid-row: 6/7;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.buttoms-canvas .stikers-countainer img {
+    width: 100%;
+    height: 78%;
+    object-fit: contain;
+}
+
 .donload {
     grid-column: 1/2;
     grid-row: 7/8;
@@ -128,6 +142,7 @@ canvas {
     grid-column: 2/3;
     grid-row: 7/8;
     opacity: 0;
+    cursor: pointer;
 }
 
 .img-upload {

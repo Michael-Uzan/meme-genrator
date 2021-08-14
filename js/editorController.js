@@ -39,6 +39,7 @@ function addListeners() {
     gCanvas.addEventListener('mousedown', onDown)
     gCanvas.addEventListener('mousemove', onMove)
     gCanvas.addEventListener('mouseup', onUp)
+    gCanvas.addEventListener('mouseleave', onUp);
     // Touch
     gCanvas.addEventListener('touchstart', onDown)
     gCanvas.addEventListener('touchmove', onMove)
@@ -49,30 +50,52 @@ function onDown(ev) {
     const clickedPos = getEvPos(ev)
     console.log('pos', clickedPos)
     if (!isLineClicked(clickedPos)) return
-    // line is clicked:
-    RenderSelectedLine()
-    gStartPos = clickedPos
-    document.body.style.cursor = 'grabbing'
+    var selectedLine = getSelectedLine()
+    if (!selectedLine.isStiker) {
+        // line is clicked:
+        RenderSelectedLine()
+        gStartPos = clickedPos
+        document.body.style.cursor = 'grabbing'
+    } else if (selectedLine.isStiker) {
+        // Stiker is Clicked
+        console.log('stiker clicked')
+        gStartPos = clickedPos
+        document.body.style.cursor = 'grabbing'
+        document.querySelector('[name=text]').value = '';
+        document.querySelector('[name=text]').placeholder = 'sticker!';
+    }
+
+
 }
 
 function onMove(ev) {
     if (!isCanvas()) return
     const line = getDragLine();
     if (line.isDrag) {
-        const pos = getEvPos(ev)
-        const dx = pos.x - gStartPos.x
-        const dy = pos.y - gStartPos.y
-        moveLine(dx, dy)
+        var pos = getEvPos(ev)
+        var dx = pos.x - gStartPos.x
+        var dy = pos.y - gStartPos.y
+        if (!line.isStiker) {
+            moveLine(dx, dy)
+            renderCanvas()
+        } else if (line.isStiker) {
+            moveLineStiker(dx, dy)
+            renderCanvas()
+        }
         gStartPos = pos
-        renderCanvas()
         renderRecEditor(line)
     }
 }
 
 function onUp() {
+    if (!isCanvas()) return
     renderCanvas()
     setFlaseLineDrag()
+    // Render Rec Edit //
+    var selectedLine = getSelectedLine()
+    renderRecEditor(selectedLine)
     document.body.style.cursor = 'auto'
+    if (!selectedLine.isStiker) document.querySelector('[name=text]').placeholder = 'type in something';
 }
 
 function getEvPos(ev) {
@@ -108,12 +131,23 @@ function renderCanvas() {
     drawLines();
 }
 
+function drawStiker(stiker) {
+    let stikerRender = new Image();
+    stikerRender.src = stiker.url;
+    stikerRender.onload = () => {
+        gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
+    };
+}
+
 function drawLines() {
     if (!isCanvas()) return
     var meme = getMeme();
     meme.lines.forEach(line => {
-
-        drawText(line.txt, line.position.x, line.position.y, line.fontSize, line.color, line.font, line.textAlign)
+        if (!line.isStiker) {
+            drawText(line.txt, line.position.x, line.position.y, line.fontSize, line.color, line.font, line.textAlign)
+        } else if (line.isStiker) {
+            drawStiker(line.isStiker)
+        }
     });
 }
 
@@ -134,17 +168,22 @@ function drawText(txt, x, y, size, color, font, align) {
 }
 
 function renderRecEditor(line) {
-    if (line.textAlign === 'left') {
-        drawRect((line.position.x - 10), (line.position.y - (1 * line.fontSize)),
-            line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
-    }
-    if (line.textAlign === 'center') {
-        drawRect((line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize / 2)), (line.position.y - (1 * line.fontSize)),
-            line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
-    }
-    if (line.textAlign === 'right') {
-        drawRect((line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize)), (line.position.y - (1 * line.fontSize)),
-            line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
+    if (!line.isStiker) {
+        if (line.txt === '') return
+        if (line.textAlign === 'left') {
+            drawRect((line.position.x - 10), (line.position.y - (1 * line.fontSize)),
+                line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
+        }
+        if (line.textAlign === 'center') {
+            drawRect((line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize / 2)), (line.position.y - (1 * line.fontSize)),
+                line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
+        }
+        if (line.textAlign === 'right') {
+            drawRect((line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize)), (line.position.y - (1 * line.fontSize)),
+                line.txt.length * (0.55 * line.fontSize), (1.2 * line.fontSize))
+        }
+    } else {
+        drawRect(line.isStiker.position.x, line.isStiker.position.y, line.isStiker.widthX, line.isStiker.heightY)
     }
 }
 
@@ -163,9 +202,11 @@ function getCanvas() {
 
 function onType(txt) {
     if (!isCanvas()) return
-    console.log('rendering on Canvas: ', txt);
     updateTxtLine(txt)
     renderCanvas()
+    // Render Rec Edit //
+    var selectedLine = getSelectedLine()
+    renderRecEditor(selectedLine)
 }
 function onChangeFont(font) {
     if (!isCanvas()) {
@@ -190,7 +231,6 @@ function onChangeColor() {
     }
     var outLineColor = document.querySelector('[name=text-outline-color]').value
     var fillColor = document.querySelector('[name=text-fill-color]').value
-    console.log('outLineColor, fillColor', outLineColor, fillColor)
     const SelectedColor = { outLineColor: outLineColor, fillColor: fillColor }
     changeColor(SelectedColor)
     renderCanvas()
@@ -200,6 +240,15 @@ function onAddText() {
     if (!isCanvas()) return
     addText(gCanvas.height, gCanvas.width)
     RenderSelectedLine()
+    renderCanvas();
+    // Render Rec Edit //
+    var selectedLine = getSelectedLine()
+    renderRecEditor(selectedLine)
+}
+
+function onAddStiker(id) {
+    if (!isCanvas()) return
+    addStiker(gCanvas.height, gCanvas.width, id)
     renderCanvas();
 }
 
@@ -220,6 +269,15 @@ function onChangeLineIdx() {
     if (!isCanvas()) return
     changeLineIdx()
     RenderSelectedLine()
+    renderCanvas()
+    // Render Rec Edit //
+    var selectedLine = getSelectedLine()
+    renderRecEditor(selectedLine)
+    document.querySelector('[name=text]').placeholder = 'type n something';
+    if (selectedLine.isStiker) {
+        document.querySelector('[name=text]').value = '';
+        document.querySelector('[name=text]').placeholder = 'sticker!';
+    }
 }
 
 function RenderSelectedLine() {
@@ -242,9 +300,9 @@ function cleanTxtLine() {
 
 function onSaveMeme() {
     if (!isCanvas()) return
+    var btn = document.querySelector('.btn-save');
     if (gIsUpload) {
-        const btn = document.querySelector('.btn-save');
-        btn.innerText = 'Can not!'
+        btn.innerText = 'Can\'t!'
         btn.style.color = 'red'
         setTimeout(function () {
             btn.innerText = 'Save'
@@ -252,6 +310,13 @@ function onSaveMeme() {
         }, 1200)
         return
     }
+    btn.innerText = 'Saving!'
+    btn.style.color = 'red'
+    setTimeout(function () {
+        btn.innerText = 'Save'
+        btn.style.color = 'white'
+    }, 1200)
+    renderCanvas()
     saveMeme(gMeme, gCanvas)
 }
 
@@ -265,6 +330,7 @@ function loadSavedMeme(meme) {
 // DOWNLOAD CANVAS //
 
 function onDownloadImg(elLink) {
+    renderCanvas()
     var imgContent = gCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
 }
@@ -301,8 +367,8 @@ function renderImg(img) {
 
 function onShareImage() {
     if (!isCanvas()) return
+    renderCanvas()
     var imgCanvasToShare = gCanvas.toDataURL('image/jpeg')
-    console.log('imgCanvasToShare', imgCanvasToShare)
     shareImage(imgCanvasToShare)
 }
 

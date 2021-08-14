@@ -9,6 +9,26 @@
     src: url(../fonts/montserrat/Montserrat-Regular.ttf);
 }
 
+@font-face {
+    font-family: Brands;
+    src: url(../fonts/Brands/fa-brands-400.ttf);
+}
+
+@font-face {
+    font-family: Icons;
+    src: url(../fonts/Brands/fa-solid-900.ttf);
+}
+
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: Secular;
+    src: url(../fonts/SecularOne-Regular.ttf);
+}
+
 /* BASE */
 
 html {

@@ -18,6 +18,7 @@ function saveMeme(gMeme, gCanvas) {
 function loadMeme() {
     gSavedMemes = loadFromStorage(DataBaseKey)
     if (!gSavedMemes) gSavedMemes = { savedMemes: [] };
+    console.log('gSavedMemes', gSavedMemes)
 }
 
 function getSavedMemes() {

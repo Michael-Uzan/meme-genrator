@@ -82,6 +82,9 @@
             <select onchange="onChangeFont(this.value)" name="fonts" id="fonts">
                 <option value="Impact">Impact</option>
                 <option value="Ariel">Ariel</option>
+                <option value="Lato">Lato</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Helvetica">Helvetica</option>
             </select>
 
             <div class="outline-color">
@@ -93,6 +96,13 @@
                 <input value="#000" onchange="onChangeColor()" type="color" name="text-fill-color">
             </div>
             <div class="img-color-fill"><img src="img/icons/paint-board-and-brush.png"></div>
+
+            <div class="stikers-countainer">
+                <div class="stiker1"><img onclick="onAddStiker(0)" src="img/stickers/S1.png"></div>
+                <div class="stiker2"><img onclick="onAddStiker(1)" src="img/stickers/S2.png"></div>
+                <div class="stiker3"><img onclick="onAddStiker(2)" src="img/stickers/S3.png"></div>
+            </div>
+
 
             <div class="btn btn-save theme-color" onclick="onSaveMeme()">Save</div>
             <div onclick="onShareImage()" class="share-canvas"><img src="img/icons/share.png"></div>
