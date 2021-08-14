@@ -97,6 +97,30 @@ function isLineClicked(clickedPos) {
     return true
 }
 
+// HANDLE CHECK //
+
+function isHandleClicked(clickedPos) {
+    var lineIdx = gMeme.lines.findIndex(function (line) {
+        if (!line.isStiker) {
+            if (line.textAlign === 'left') {
+                return (clickedPos.x < ((line.position.x - 10 + 20)) &&
+                    ((clickedPos.y) > (line.position.y - (1 * line.fontSize))))
+            } else if (line.textAlign === 'center') {
+                return ((clickedPos.x < (20 + (line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize / 2))) &&
+                    ((clickedPos.y) > ((line.position.y - (1 * line.fontSize))))));
+            } else {
+                return ((clickedPos.x < (20 + line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize)) &&
+                    ((clickedPos.y) > (line.position.y - (1 * line.fontSize)))))
+            }
+        } else if (line.isStiker) {
+            return ((clickedPos.x < (line.isStiker.position.x + 20))
+                && (clickedPos.y < (line.isStiker.position.y + 20)))
+        }
+    })
+    if (lineIdx === -1) return false;
+    else return true
+}
+
 // MEME SERVICE
 
 function getMeme() {
@@ -125,10 +149,23 @@ function updateTxtLine(txt) {
     }
 }
 
+function plusfontStiker(diff) {
+    var width = gMeme.lines[gMeme.selectedLineIdx].isStiker.widthX
+    var height = gMeme.lines[gMeme.selectedLineIdx].isStiker.heightY
+
+    if ((width < 35 && diff < 0)
+        || (width > 250 && diff > 0) || (height < 35 && diff < 0)
+        || (height > 250 && diff > 0)) {
+        diff = 0;
+    }
+    gMeme.lines[gMeme.selectedLineIdx].isStiker.widthX += diff
+    gMeme.lines[gMeme.selectedLineIdx].isStiker.heightY += diff
+}
+
 function plusFont(diff) {
     var fontSize = gMeme.lines[gMeme.selectedLineIdx].fontSize
-    if ((fontSize === 25 && diff < 0)
-        || (fontSize === 150 && diff > 0)) {
+    if ((fontSize < 25 && diff < 0)
+        || (fontSize > 150 && diff > 0)) {
         diff = 0;
     }
     gMeme.lines[gMeme.selectedLineIdx].fontSize += diff

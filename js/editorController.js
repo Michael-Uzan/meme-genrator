@@ -5,6 +5,7 @@ var gCanvas;
 var gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 var gIsUpload = false;
+var gIsHandle = false;
 
 
 function onInitMeme() {
@@ -48,8 +49,11 @@ function addListeners() {
 
 function onDown(ev) {
     const clickedPos = getEvPos(ev)
-    console.log('pos', clickedPos)
     if (!isLineClicked(clickedPos)) return
+    if (isHandleClicked(clickedPos)) {
+        gIsHandle = true;
+        console.log('handle clicked')
+    }
     var selectedLine = getSelectedLine()
     if (!selectedLine.isStiker) {
         // line is clicked:
@@ -58,7 +62,7 @@ function onDown(ev) {
         document.body.style.cursor = 'grabbing'
     } else if (selectedLine.isStiker) {
         // Stiker is Clicked
-        console.log('stiker clicked')
+        // console.log('stiker clicked')
         gStartPos = clickedPos
         document.body.style.cursor = 'grabbing'
         document.querySelector('[name=text]').value = '';
@@ -71,25 +75,40 @@ function onDown(ev) {
 function onMove(ev) {
     if (!isCanvas()) return
     const line = getDragLine();
-    if (line.isDrag) {
+    if (line.isDrag && !gIsHandle) {
         var pos = getEvPos(ev)
         var dx = pos.x - gStartPos.x
         var dy = pos.y - gStartPos.y
         if (!line.isStiker) {
             moveLine(dx, dy)
-            renderCanvas()
+            // renderCanvas()
         } else if (line.isStiker) {
             moveLineStiker(dx, dy)
-            renderCanvas()
+            // renderCanvas()
         }
         gStartPos = pos
-        renderRecEditor(line)
         renderCanvas()
+        renderRecEditor(line)
+    } else if (line.isDrag && gIsHandle) {
+        var pos = getEvPos(ev)
+        var dx = pos.x - gStartPos.x
+        var dy = pos.y - gStartPos.y
+        if (!line.isStiker) {
+            if (dy < 0) plusFont(1)
+            else if (dy > 0) plusFont(-1)
+        } else if (line.isStiker) {
+            if (dy < 0) plusfontStiker(1)
+            else if (dy > 0) plusfontStiker(-1)
+        }
+        gStartPos = pos
+        renderCanvas()
+        renderRecEditor(line)
     }
 }
 
 function onUp() {
     if (!isCanvas()) return
+    gIsHandle = false;
     renderCanvas()
     setFlaseLineDrag()
     // Render Rec Edit //
@@ -137,7 +156,6 @@ function drawStiker(stiker) {
     let stikerRender = new Image();
     stikerRender.src = stiker.url;
     gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
-
     // let stikerRender = new Image();
     // stikerRender.src = stiker.url;
     // stikerRender.onload = () => {
@@ -198,6 +216,8 @@ function drawRect(x, y, width, height) {
     gCtx.beginPath()
     gCtx.rect(x, y, width, height)
     gCtx.strokeStyle = '#ffffff';
+    gCtx.rect(x, y, 20, 20)
+    gCtx.fillStyle = '#ffffff'
     gCtx.stroke()
 }
 
@@ -226,7 +246,12 @@ function onChangeFont(font) {
 
 function onPlusFont(diff) {
     if (!isCanvas()) return
-    plusFont(diff)
+    var selectedLine = getSelectedLine()
+    if (!selectedLine.isStiker) {
+        plusFont(diff)
+    } else {
+        plusfontStiker(diff)
+    }
     renderCanvas()
 }
 
