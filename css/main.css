@@ -50,6 +50,15 @@ img {
     background-color: #fd7f00;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a .active {
+    color: black;
+}
+
 /* HELPERS */
 
 /* flex helpers */

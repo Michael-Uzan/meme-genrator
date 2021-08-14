@@ -21,10 +21,10 @@
     <header id="top" class="main-header main-layout flex direction-row align-center space-between theme-color">
         <div class="logo flex  align-center"><img src="img/icons/LOGO.png" alt=""></div>
         <ul class="main-nav clean-list">
-            <li class="active" onclick="onChangeTab('gallery'),activeNav(this),openRightNav()">Gallery</li>
+            <li class="active gallery-nav" onclick="onChangeTab('gallery'),activeNav(this),openRightNav()">Gallery</li>
             <li class="active-img" onclick="onChangeTab('editor'),activeNav(this),openRightNav()">Editor</li>
             <li onclick="onChangeTab('saved'),activeNav(this),openRightNav(),onInitSaved()">Saved</li><span>|</span>
-            <li>About</li>
+            <li onclick="onChangeTab('gallery'),activeNav('about'),openRightNav()"><a href="#about">About</a></li>
         </ul>
         <button class="btn-menu-toggle theme-color" onclick="openRightNav()">☰</button>
     </header>
@@ -53,6 +53,20 @@
 
         <section class="photos-container main-layout">
             <!-- RENDER PHOTOS -->
+        </section>
+
+        <section id="about" class="about main-layout flex">
+            <div class="me-photo-container"><img class="me-photo" src="img/me.png"></div>
+            <div class="text">
+                <h2>Michael Uzan</h2>
+                <p>Lets Meme!</p>
+                <div class="links-countainer">
+                    <ul class="links flex direction-row clean-list">
+                        <li><img src="img/icons/linkedin-logo.png"></li>
+                        <li><img src="img/icons/github-logo.png"></li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -146,7 +160,6 @@
     <script src="js/galleryController.js"></script>
     <script src="js/editorController.js"></script>
     <script src="js/savedMemeController.js"></script>
-    <!-- <script src="js/userMemesController.js"></script> -->
 </body>
 
 </html>

@@ -60,7 +60,14 @@ function onChangeTab(tab) {
 //  RENDER NAV //
 
 function activeNav(navEl) {
-    if (navEl.classList.contains('active')) return
+    if (navEl === 'about') {
+        var elLinks = document.querySelectorAll('header li');
+        elLinks.forEach(elLink => {
+            if (elLink.classList.contains('active')) elLink.classList.remove('active')
+        })
+        document.querySelector('.gallery-nav').classList.add('active');
+    }
+    else if (navEl.classList.contains('active')) return
     else {
         var elLinks = document.querySelectorAll('header li');
         elLinks.forEach(elLink => {

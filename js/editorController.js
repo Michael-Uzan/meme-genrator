@@ -52,7 +52,6 @@ function onDown(ev) {
     if (!isLineClicked(clickedPos)) return
     if (isHandleClicked(clickedPos)) {
         gIsHandle = true;
-        console.log('handle clicked')
     }
     var selectedLine = getSelectedLine()
     if (!selectedLine.isStiker) {
@@ -62,7 +61,6 @@ function onDown(ev) {
         document.body.style.cursor = 'grabbing'
     } else if (selectedLine.isStiker) {
         // Stiker is Clicked
-        // console.log('stiker clicked')
         gStartPos = clickedPos
         document.body.style.cursor = 'grabbing'
         document.querySelector('[name=text]').value = '';
@@ -156,11 +154,7 @@ function drawStiker(stiker) {
     let stikerRender = new Image();
     stikerRender.src = stiker.url;
     gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
-    // let stikerRender = new Image();
-    // stikerRender.src = stiker.url;
-    // stikerRender.onload = () => {
-    //     gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
-    // };
+
 }
 
 

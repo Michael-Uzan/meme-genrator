@@ -1,10 +1,7 @@
 'use strict'
-// let gIsChangeTextSize;
-// let handleSize = 15;
 
 var gMeme;// = createMeme();
 const gStickers = ['img/stickers/S1.png', 'img/stickers/S2.png', 'img/stickers/S3.png'];
-
 
 // CREATE MEME
 
@@ -57,17 +54,8 @@ function _createStiker(height, width, id) { //stiker.widthX, stiker.heightY
 // IS BOOLEAN?
 
 function isCanvas() {
-    return gMeme; ///////////////////////////////////////////////////////////
+    return gMeme;
 }
-
-// function isStikerClicked(clickedPos) {
-//     if (!gMeme) return false;
-//     var stikerIdx = gMeme.stikers.findIndex(function (stiker) {
-//         return (clickedPos.x > stiker.position.x) && (clickedPos.x < stiker.widthX)
-//             && (clickedPos.y > stiker.heightY) && (clickedPos.y < stiker.heightY)
-//     })
-
-// }
 
 function isLineClicked(clickedPos) {
     if (!gMeme) return false;
@@ -205,7 +193,6 @@ function moveLineStiker(dx, dy) {
 function setFlaseLineDrag() {
     if (!gMeme.isDrag) return
     gMeme.lines[gMeme.selectedLineIdx].isDrag = false;
-    // gMeme.selectedLineIdx = null;
     gMeme.isDrag = false;
 }
 
