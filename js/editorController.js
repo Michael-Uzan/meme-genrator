@@ -84,6 +84,7 @@ function onMove(ev) {
         }
         gStartPos = pos
         renderRecEditor(line)
+        renderCanvas()
     }
 }
 
@@ -132,12 +133,18 @@ function renderCanvas() {
 }
 
 function drawStiker(stiker) {
+
     let stikerRender = new Image();
     stikerRender.src = stiker.url;
-    stikerRender.onload = () => {
-        gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
-    };
+    gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
+
+    // let stikerRender = new Image();
+    // stikerRender.src = stiker.url;
+    // stikerRender.onload = () => {
+    //     gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
+    // };
 }
+
 
 function drawLines() {
     if (!isCanvas()) return
