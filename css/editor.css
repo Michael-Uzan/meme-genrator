@@ -27,6 +27,14 @@ canvas {
     justify-content: center;
 }
 
+.buttoms-canvas>div:hover {
+    box-shadow: 0 0 0 2px #ff7f00;
+}
+
+.stikers-countainer:hover {
+    box-shadow: 0 0 0 2px white;
+}
+
 .buttoms-canvas div img {
     height: 66%;
     width: 66%;
@@ -156,6 +164,10 @@ canvas {
     color: white;
     background-color: #ff7f00;
     /* padding-top: 5%; */
+}
+
+.buttoms-canvas .btn:hover {
+    box-shadow: 0 0 0 2px #0095ff;
 }
 
 .btn-save {

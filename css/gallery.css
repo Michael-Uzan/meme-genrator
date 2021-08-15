@@ -36,6 +36,10 @@
     cursor: pointer;
 }
 
+.common-serach li:hover {
+    color: #ff7f00;
+}
+
 /* NO SAVED MEME */
 
 .no-search-items {
@@ -61,6 +65,10 @@
 .photos-container img {
     object-fit: cover;
     height: 100%;
+}
+
+.photos-container img:hover {
+    box-shadow: 0 0 0 5px #ff7f00;
 }
 
 /* ABOUT */

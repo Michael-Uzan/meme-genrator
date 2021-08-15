@@ -38,6 +38,10 @@
     justify-content: space-between;
 }
 
+.btn:hover {
+    box-shadow: 0 0 0 2px #0095ff;
+}
+
 /* RESPONSIVE */
 
 /* Mobile  */
