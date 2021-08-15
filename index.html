@@ -19,7 +19,8 @@
     <!-- HEADER -->
 
     <header id="top" class="main-header main-layout flex direction-row align-center space-between theme-color">
-        <div class="logo flex  align-center"><img src="img/icons/LOGO.png" alt=""></div>
+        <div class="logo flex align-center"><img onclick="onChangeTab('gallery'),activeNav('about')"
+                src="img/icons/LOGO.png"></div>
         <ul class="main-nav clean-list">
             <li class="active gallery-nav" onclick="onChangeTab('gallery'),activeNav(this),openRightNav()">Gallery</li>
             <li class="active-img" onclick="onChangeTab('editor'),activeNav(this),openRightNav()">Editor</li>

@@ -150,11 +150,9 @@ function renderCanvas() {
 }
 
 function drawStiker(stiker) {
-
     let stikerRender = new Image();
     stikerRender.src = stiker.url;
     gCtx.drawImage(stikerRender, stiker.position.x, stiker.position.y, stiker.widthX, stiker.heightY);
-
 }
 
 
@@ -210,7 +208,7 @@ function drawRect(x, y, width, height) {
     gCtx.beginPath()
     gCtx.rect(x, y, width, height)
     gCtx.strokeStyle = '#ffffff';
-    gCtx.rect(x, y, 20, 20)
+    gCtx.fillRect(x, y, 10, 10);
     gCtx.fillStyle = '#ffffff'
     gCtx.stroke()
 }

@@ -91,14 +91,14 @@ function isHandleClicked(clickedPos) {
     var lineIdx = gMeme.lines.findIndex(function (line) {
         if (!line.isStiker) {
             if (line.textAlign === 'left') {
-                return (clickedPos.x < ((line.position.x - 10 + 20)) &&
-                    ((clickedPos.y) > (line.position.y - (1 * line.fontSize))))
+                return (clickedPos.x < ((line.position.x - 10 + 25)) &&
+                    ((clickedPos.y) < (line.position.y - (0.5 * line.fontSize))))
             } else if (line.textAlign === 'center') {
-                return ((clickedPos.x < (20 + (line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize / 2))) &&
-                    ((clickedPos.y) > ((line.position.y - (1 * line.fontSize))))));
+                return ((clickedPos.x < (25 + (line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize / 2))) &&
+                    ((clickedPos.y) < ((line.position.y - (0.5 * line.fontSize))))));
             } else {
-                return ((clickedPos.x < (20 + line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize)) &&
-                    ((clickedPos.y) > (line.position.y - (1 * line.fontSize)))))
+                return ((clickedPos.x < (25 + line.position.x - 10 - (line.txt.length * 0.5 * line.fontSize)) &&
+                    ((clickedPos.y) < (line.position.y - (0.5 * line.fontSize)))))
             }
         } else if (line.isStiker) {
             return ((clickedPos.x < (line.isStiker.position.x + 20))
