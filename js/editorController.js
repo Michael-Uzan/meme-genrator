@@ -79,10 +79,8 @@ function onMove(ev) {
         var dy = pos.y - gStartPos.y
         if (!line.isStiker) {
             moveLine(dx, dy)
-            // renderCanvas()
         } else if (line.isStiker) {
             moveLineStiker(dx, dy)
-            // renderCanvas()
         }
         gStartPos = pos
         renderCanvas()
@@ -136,7 +134,7 @@ function getEvPos(ev) {
 
 function renderCanvas() {
     if (!gIsUpload) {
-        var currImg = getSelectedImage() // {id url keywords: [])
+        var currImg = getSelectedImage()
         if (!currImg) {
             drawText('Choose a photo', (gCanvas.height / 5), (gCanvas.height / 5), (gCanvas.height / 10), { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start')
             return
@@ -171,7 +169,7 @@ function drawLines() {
 function drawImgFromLocal(imgUrl) {
     var img = new Image()
     img.src = imgUrl;
-    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
 }
 
 function drawText(txt, x, y, size, color, font, align) {
@@ -308,7 +306,6 @@ function RenderSelectedLine() {
     var selectedLine = getSelectedLine()
     // render Text
     document.querySelector('[name=text]').value = selectedLine.txt;
-    // document.querySelector('[name=text]').focus();
     // render Color
     document.querySelector('[name=text-outline-color]').value = selectedLine.color.outLineColor
     document.querySelector('[name=text-fill-color]').value = selectedLine.color.fillColor
@@ -317,7 +314,6 @@ function RenderSelectedLine() {
 
 function cleanTxtLine() {
     document.querySelector('[name=text]').value = '';
-    // document.querySelector('[name=text]').focus();
 }
 
 // SAVED & LOAD MEME //
@@ -367,7 +363,6 @@ function onImgInput(ev) {
     resetMeme();
     cleanTxtLine();
     gIsUpload = true;
-    // setSelectedImg();
     renderCanvas();
 
 }
@@ -380,7 +375,7 @@ function loadImageFromInput(ev, onImageReady) {
         var img = new Image()
         img.onload = onImageReady.bind(null, img)
         img.src = event.target.result
-        saveUplaodImgURL(img.src) //
+        saveUplaodImgURL(img.src)
     }
     reader.readAsDataURL(ev.target.files[0])
 }

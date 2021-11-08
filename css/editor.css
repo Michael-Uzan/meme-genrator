@@ -163,7 +163,6 @@ canvas {
     border-radius: 1.2em;
     color: white;
     background-color: #ff7f00;
-    /* padding-top: 5%; */
 }
 
 .buttoms-canvas .btn:hover {
@@ -223,7 +222,6 @@ canvas {
     .buttoms-canvas {
         padding-top: 10px;
         width: 283px;
-        /* height: 450px; */
         grid-template-columns: 40px 40px 40px 40px 40px;
         grid-template-rows: 40px 40px 2px 40px 40px 50px 40px;
         grid-gap: 8px 25px;

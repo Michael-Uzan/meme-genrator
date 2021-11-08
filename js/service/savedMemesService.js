@@ -1,6 +1,6 @@
 'use strict'
 
-var gSavedMemes; //= { savedMemes: [] };
+var gSavedMemes;
 
 const DataBaseKey = 'DataBaseMemes'
 

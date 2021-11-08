@@ -1,6 +1,6 @@
 'use strict'
 
-var gMeme;// = createMeme();
+var gMeme;
 const gStickers = ['img/stickers/S1.png', 'img/stickers/S2.png', 'img/stickers/S3.png'];
 
 // CREATE MEME
@@ -41,17 +41,15 @@ function _createLine(linesCount, height, width, align, isStiker = false, id) {
     }
 }
 
-function _createStiker(height, width, id) { //stiker.widthX, stiker.heightY
+function _createStiker(height, width, id) {
     return {
         position: { x: width / 3, y: height / 3 },
-        // isDrag: false,
         url: gStickers[id],
         widthX: (width / 5),
         heightY: (height / 5)
     }
 }
 
-// IS BOOLEAN?
 
 function isCanvas() {
     return gMeme;
@@ -127,7 +125,6 @@ function setSelectedImg(photoId) {
 // TEXT SERVICE
 
 function updateTxtLine(txt) {
-    // if (!gMeme) gMeme = createMeme();
     if (!gMeme.lines[gMeme.selectedLineIdx].isStiker) {
         gMeme.lines[gMeme.selectedLineIdx].txt = txt;
     } else {
@@ -159,7 +156,7 @@ function plusFont(diff) {
     gMeme.lines[gMeme.selectedLineIdx].fontSize += diff
 }
 
-function changeColor(color) {  //{ outLineColor: outLineColor, fillColor: fillColor }
+function changeColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
@@ -173,7 +170,7 @@ function textAlign(align) {
     if (align === 'left') var x = (canvas.width / 10);
     if (align === 'center') var x = canvas.width / 2;
     if (align === 'right') var x = canvas.width - (canvas.width / 10);
-    gMeme.lines[gMeme.selectedLineIdx].position.x = x; //position: { x: 100, y: 100 },
+    gMeme.lines[gMeme.selectedLineIdx].position.x = x;
 }
 
 function getDragLine() {
