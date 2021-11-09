@@ -22,6 +22,13 @@ You can create new Meme , edit and share your Meme with friends.</h3>
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> <a href="https://canvasjs.com" target="_blank"> <img src="https://raw.githubusercontent.com/Hardik0307/Hardik0307/master/assets/canvasjs-charts.svg" alt="canvasjs" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> </p>
 
+<img align="left" src="https://res.cloudinary.com/looply/image/upload/v1636456903/bbbb_u437wj.jpg"  />
+
+<img align="left" src="https://res.cloudinary.com/looply/image/upload/v1636456903/456_c788ug.jpg"  />
+
+<img align="left" src="https://res.cloudinary.com/looply/image/upload/v1636456903/meme_vsdjbf.jpg"  />
+
+
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=michael-uzan&show_icons=true&locale=en&layout=compact" alt="michael-uzan" /></p>
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=michael-uzan&show_icons=true&locale=en" alt="michael-uzan" /></p>
